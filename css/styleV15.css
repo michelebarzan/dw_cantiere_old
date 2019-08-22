@@ -1,0 +1,1848 @@
+body 
+{
+	/*background: linear-gradient(#C4C4C4,#B1D7F7);*/
+	background:#EBEBEB;
+	display: inline-block;
+    text-align: center;
+	margin:0px auto;
+	page-break-inside: avoid;
+	overflow-x:hidden;
+}
+html
+{
+	text-align: center;
+	page-break-inside: avoid;
+	overflow-x:hidden;
+}
+#container
+{
+	height:100%;
+	background-color:transparent;
+    width: 1300px; 
+	text-align: center;
+}
+#header
+{
+	z-index:98;
+	position: fixed;
+	height:50px;
+    width:100%;
+    margin:0 auto;
+	top: 0;
+	left:0;
+	right:0;
+	display:inline-block;
+    background:#171717;
+	text-align: right;
+}
+#pageName
+{
+	padding-left:30px;
+	color:white;
+	float:left;
+	display:inline-block;
+	height:50px;
+	line-height:50px;
+	width:auto;
+	font-size:90%;
+	font-family: 'Montserrat', sans-serif;
+	font-weight:normal;
+	text-align:left;
+}
+#user
+{
+	display:inline-block;
+	float:right;
+	overflow:hidden;
+	display:inline-block;
+	height:50px;
+	width:auto;
+	-webkit-transition: all 0.5s;
+    transition: all 0.5s;
+	box-sizing:border-box;
+}
+#user:hover
+{
+	padding-right:30px
+}
+#user:hover #btnUserSettings 
+{
+	visibility:visible;
+	height:50px;
+	width:24px;
+	margin-left:30px;
+	background-image: url("../images/settings.png");
+	background-position: center center;
+	background-repeat: no-repeat;
+}
+#user:hover #btnLogout 
+{
+	visibility:visible;
+	width:95px;
+	margin-left:30px;
+	height:34px;
+	background-image: url("../images/logout.png");
+	background-position: 63px center;
+	background-repeat: no-repeat;
+	background-color:white;
+}
+#username
+{
+	display:inline-block;
+	float:left;
+	font-family: 'Montserrat', sans-serif;
+	font-weight:normal;
+	height:50px;
+	line-height:50px;
+	color:white;
+	width:auto;
+}
+#btnUser
+{
+	-webkit-transition: all 0.3s;
+    transition: all 0.3s;
+	box-sizing:border-box;
+	display:inline-block;
+	float:left;
+	background:white;
+	height:42px;
+	width:42px;
+	margin-top:4px;
+	margin-bottom:4px;
+	margin-left:30px;
+	border:4px solid white;
+	border-radius:20px;
+	background-image: url("../images/user.png");
+	background-position: center center;
+	background-repeat: no-repeat;
+	cursor:pointer;
+	outline:none;
+}
+#btnUser:hover
+{
+	border-top:4px solid white;
+	border-left:8px solid white;
+	border-right:8px solid white;
+	border-bottom:4px solid white;
+	background-image: url("../images/user.png");
+	background-position: center center;
+	background-repeat: no-repeat;
+}
+#btnNotifica
+{
+	outline:none;
+	display:inline-block;
+	float:left;
+	height:50px;
+	width:24px;
+	margin-left:30px;
+	background-image: url("../images/bell.png");
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-color:transparent;
+	border:none;
+	cursor:pointer;
+	-webkit-transition: all 0.3s;
+    transition: all 0.3s;
+}
+#btnNotifica:hover
+{
+	background-image: url("../images/bell.png");
+	background-position: center center;
+	background-repeat: no-repeat;
+	-ms-transform: rotate(20deg); /* IE 9 */
+    -webkit-transform: rotate(20deg); /* Safari */
+    transform: rotate(20deg); /* Standard syntax */
+}
+#btnNuovaNotifica
+{
+	-webkit-transition: all 0.2s;
+    transition: all 0.2s;
+	visibility:hidden;
+	outline:none;
+	display:inline-block;
+	float:left;
+	height:14px;
+	width:14px;
+	margin-left:-5px;
+	margin-top:6px;
+	background-color:transparent;
+	border-radius:10px;
+	border:none;
+	background-image: url("../images/exclamation.png");
+	background-position: center center;
+	background-repeat: no-repeat;
+}
+#notifichePadding
+{
+	display: none;
+    width: 250px;
+	height:25px;
+    background-color: transparent;
+    text-align: center;
+    position: absolute;
+    z-index: 100;
+    top: 35;
+    right: 105;
+}
+#notifiche
+{
+	display: none;
+    width: 250px;
+	height:auto;
+    background-color: white;
+    text-align: center;
+    position: absolute;
+    z-index: 99;
+    top: 55;
+    right: 105;
+	-webkit-box-shadow: 0 0 8px #353535;
+    box-shadow: 0 0 8px #353535;
+}
+#notifiche::after 
+{
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -10px;
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent transparent gray transparent;
+}
+#nessunaNotifica
+{
+	box-sizing:border-box;
+	padding-left:10px;
+	padding-right:10px;
+	margin:0px;
+	height:40px;
+	line-height:40px;
+	width:100%;
+	display:inline-block;
+	border-bottom:1px solid #ddd;
+	font-family: 'Montserrat', sans-serif;
+	font-size:95%;
+	color:black;
+	font-weight:bold;
+	text-align:center;
+}
+.notificheRow
+{
+	box-sizing:border-box;
+	padding:10px;
+	margin:0px;
+	min-height:40px;
+	height:auto;
+	line-height:20px;
+	width:100%;
+	display:inline-block;
+	border-bottom:1px solid #ddd;
+	font-family: 'Montserrat', sans-serif;
+	font-size:95%;
+	color:black;
+	font-weight:normal;
+	text-align:left;
+}
+#btnUserSettings
+{
+	visibility:hidden;
+	outline:none;
+	display:inline-block;
+	float:left;
+	background:transparent;
+	height:0px;
+	width:0px;
+	margin-left:0px;
+	border:none;
+	cursor:pointer;
+	-webkit-transition: all 0.3s;
+    transition: all 0.3s;
+}
+#btnUserSettings:hover
+{
+	background-image: url("../images/settings.png");
+	background-position: center center;
+	background-repeat: no-repeat;
+	-ms-transform: rotate(70deg); /* IE 9 */
+    -webkit-transform: rotate(70deg); /* Safari */
+    transform: rotate(70deg); /* Standard syntax */
+}
+#userSettingsPadding
+{
+	display: none;
+    width: 250px;
+	height:25px;
+    background-color: transparent;
+    text-align: center;
+    position: absolute;
+    z-index: 100;
+    top: 35;
+    right: 42;
+}
+#userSettings
+{
+	display: none;
+    width: 250px;
+	height:auto;
+    background-color: white;
+    text-align: center;
+    position: absolute;
+    z-index: 99;
+    top: 55;
+    right: 42;
+	-webkit-box-shadow: 0 0 8px #353535;
+    box-shadow: 0 0 8px #353535;
+}
+#userSettings::after 
+{
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -10px;
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent transparent gray transparent;
+}
+#userSettingsRow1
+{
+	background:gray;
+	margin:0px;
+	height:45px;
+	line-height:45px;
+	width:100%;
+	display:inline-block;
+	border-bottom:1px solid #ddd;
+}
+#titoloUserSettings
+{
+	font-size:105%;
+	margin-top:10px;
+	margin-left:15px;
+	text-align:left;
+	width:150px;
+	height:25px;
+	line-height:25px;
+	display:inline-block;
+	float:left;
+	font-family: 'Montserrat', sans-serif;
+	font-weight:bold;
+	color:white;
+}
+#btnChiudiUserSettings
+{
+	margin-top:10px;
+	margin-right:10px;
+	text-align:center;
+	width:50px;
+	outline:none;
+	height:25px;
+	display:inline-block;
+	float:right;
+	background:transparent;
+	border:none;
+	cursor:pointer;
+	background-image: url("../images/crossWhite.png");
+	background-position: center center;
+	background-repeat: no-repeat;
+	-webkit-transition: all .5s;
+    transition: all .5s;
+}
+#btnChiudiUserSettings:hover
+{
+	background:red;
+	background-image: url("../images/crossWhite.png");
+	background-position: center center;
+	background-repeat: no-repeat;
+}
+#userSettingsRow2
+{
+	margin:0px;
+	height:40px;
+	line-height:40px;
+	width:100%;
+	display:inline-block;
+	border-bottom:1px solid #ddd;
+	font-family: 'Montserrat', sans-serif;
+	font-size:95%;
+	color:black;
+	font-weight:bold;
+}
+#userSettingsCambiaPassword
+{
+	font-family: 'Montserrat', sans-serif;
+	font-size:95%;
+	color:#4C91CB;
+	text-decoration:underline;
+}
+#userSettingsCambiaPassword:hover
+{
+	color:#347DB5;
+}
+#permessiUserSettings
+{
+	width:100%;
+	border-bottom:1px solid #ddd;
+	box-sizing:border-box;
+	padding-bottom:10px;
+	line-height:25px;
+	color:gray;
+	font-family: monospace;
+	font-size:105%;
+}
+#userSettingsRow3
+{
+	margin:0px;
+	height:40px;
+	line-height:40px;
+	width:100%;
+	display:inline-block;
+	font-family: 'Montserrat', sans-serif;
+	font-size:95%;
+	color:black;
+	font-weight:bold;
+}
+#btnLogout
+{
+	visibility:hidden;
+	outline:none;
+	display:inline-block;
+	float:left;
+	-webkit-transition: all 0.3s;
+    transition: all 0.3s;
+	font-family: 'Montserrat', sans-serif;
+	font-weight:bold;
+	text-align:left;
+	padding-left:10px;
+	background-color:transparent;
+	height:0px;
+	width:0px;
+	margin-left:0px;
+	margin-top:8px;
+	margin-bottom:8px;
+	border:none;
+	cursor:pointer;
+}
+#btnLogout:hover
+{
+	background-image: url("../images/logout.png");
+	background-position: 67px center;
+	background-repeat: no-repeat;
+	background-color:#EBEBEB;
+}
+#navBar
+{
+	z-index:98;
+	position: fixed;
+	text-align:left;
+	display:inline-block;
+	width:0px;
+	float:left;
+	top: 0;
+	left:0;
+	right:0;
+	bottom:40;
+	height:0px;
+	background:white;
+	-webkit-transition: width .4s; 
+    transition: width .4s;
+	-webkit-box-shadow: 11px 0px 19px -8px rgba(0,0,0,0.61);
+	-moz-box-shadow: 11px 0px 19px -8px rgba(0,0,0,0.61);
+	box-shadow: 11px 0px 19px -8px rgba(0,0,0,0.61);
+	overflow:hidden;
+}
+#nascondi
+{
+	z-index:98;
+	border:none;
+	box-sizing:border-box;
+	cursor:pointer;
+	float:left;
+	height:50px;
+	width:50px;
+	background:#395B9E;
+	display:inline-block;
+	background-image: url("../images/menu.png");
+	background-position: center center;
+	background-repeat: no-repeat;
+	text-align: center;
+	overflow:hidden;
+	outline:none;
+}
+#nascondi:hover
+{
+	background-image: url("../images/menu.png");
+	background-position: center center;
+	background-repeat: no-repeat;
+}
+#nascondi2
+{
+	box-sizing:border-box;
+	z-index:98;
+	border:none;
+	cursor:pointer;
+	float:left;
+	background-color:#395B9E;
+	display:none;
+	height:50px;
+	width:50%;
+	background-image: url("../images/menu.png");
+	background-position: 9px center;
+	background-repeat: no-repeat;
+	text-align: right;
+	overflow:hidden;
+	outline:none;
+	padding-right:0px;
+	font-family: 'Montserrat', sans-serif;
+	color:white;
+	font-weight:bold;
+	letter-spacing:4px;
+}
+#nascondi3
+{
+	box-sizing:border-box;
+	z-index:98;
+	border:none;
+	cursor:pointer;
+	float:left;
+	background-color:#395B9E;
+	display:none;
+	height:50px;
+	width:50%;
+	background-image: url("../images/logo.png");
+	background-position: 77px center;
+	background-repeat: no-repeat;
+	background-size: 64px 40px;
+	text-align: left;
+	overflow:hidden;
+	outline:none;
+	padding-left:0px;
+	font-family: 'Montserrat', sans-serif;
+	color:white;
+	font-weight:bold;
+	letter-spacing:4px;
+}
+
+.cLinklist
+{
+	width:100%;
+	height:40px;
+	border-top:1px solid white;
+	text-align: center;
+	overflow:hidden;
+}
+.cLinkList:hover
+{
+	background-color:#444444;
+}
+.btnGoToPath
+{
+	font-weight:bold;
+	cursor:pointer;
+	border:none;
+	width:0px;
+	outline:none;
+	display:inline-block;
+	height:0px;
+	line-height:50px;
+	font-family: 'Montserrat', sans-serif;
+	color:#3367d6;
+	text-decoration:underline;
+	-webkit-transition: width 0.5s; 
+    transition: width 0.5s;
+	background:transparent;
+	font-size:95%;
+}
+.btnGoToPath:hover
+{
+	box-shadow: 2px 2px 5px gray;
+	background:#F9F9F9;
+}
+#content
+{
+	margin-top:50px;
+	text-align:center;
+	display:inline-block;
+	width:100%;
+	float:right;
+	background-color:transparent;
+}
+#immagineLogo
+{
+	margin-top:0px;
+	float:center;
+	height:180px;
+	width:100%;
+	display:inline-block;
+	background-color:transparent;
+	background-image: url("../images/logo.png");
+	background-position: center center;
+	background-repeat: no-repeat;
+	text-align: center;
+	overflow:hidden;
+}
+#push
+{
+	height:70px;
+	display:inline-block;
+	width:100%;
+}
+#push2
+{
+	height:0px;
+	display:inline-block;
+	width:100%;
+}
+#footer
+{
+	z-index:98;
+	position: fixed;
+	background-color:#171717;
+	bottom:0;
+	left:0;
+	right:0;
+	margin:0 auto;
+	line-height:40px;
+    height:40px;
+    width: 100%;
+    text-align:center;
+	font-weight:normal;
+	font-size:14px;
+	color:#F9F9F9;
+	font-family: 'Montserrat', sans-serif;
+}
+#popup
+{
+	text-align:left;
+	padding:20px;
+	/*padding-top:15px;
+	padding-bottom:15px;
+	padding-left:25px;*/
+	/*padding-right:20px;*/
+	position:fixed;
+	right:50;
+	bottom:90;
+	font-size:14px;
+	font-family:'Montserrat',sans-serif;
+	font-weight:normal;
+	height:auto;
+	line-height:20px;
+	width:300px;
+	background:#171717;
+	display:inline-block;
+	color:#F9F9F9;
+	border-radius:10px;
+}
+#linkHistory
+{
+	color:#7DBFFF;
+}
+#linkHistory:active
+{
+	color:#7DBFFF;
+}
+#linkHistory:hover
+{
+	color:#55A3F2;
+}
+#btnGoTop
+{
+	height:0px;
+	text-align:center;
+    width: 0px;
+	display: inline-block;
+	position: fixed;
+	bottom: 70px;
+	right: 30px;
+	z-index: 98;
+	font-size: 100%;
+	border: none;
+	outline: none;
+	background-color:transparent;
+	background-image: url("../images/arrowup2.png");
+	background-position: center center;
+	background-repeat: no-repeat;	
+	cursor: pointer;
+	border-radius: 25px;
+	-webkit-transition:  0.5s;
+    transition:  0.5s;
+	opacity: 0;
+}
+#btnGoTop:hover
+{
+	margin-bottom:5px;
+}
+/*INDEX----------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+.homepageCommessaContainer
+{
+	width:1280px;
+	margin-left:10px;
+	margin-right:10px;
+	margin-top:10px;
+	margin-bottom:20px;
+	text-align:left;
+	height:40px;
+	-webkit-box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.38);
+	-moz-box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.38);
+	box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.38);
+}
+.homepageCommessaContainer span
+{
+	margin-left:10px;
+	text-align:left;
+	height:40px;
+	line-height:40px;
+	font-family:'Montserrat',sans-serif;
+	font-size:90%;
+	color:gray;
+}
+.homepageCommessaContainer select
+{
+	text-align:left;
+	height:20px;
+	margin-top:10px;
+	font-family:'Montserrat',sans-serif;
+	font-size:90%;
+	color:#395B9E;
+	font-weight:bold;
+	background-color:#EBEBEB;
+	border:none;
+	-webkit-transition: all .3s ;
+	-moz-transition: all .3s ;
+	-ms-transition: all .3s ;
+	-o-transition: all .3s ;
+	transition: all .3s ;
+	outline:none;
+	cursor:pointer;
+}
+.homepageCommessaContainer select:hover
+{
+	background-color:#ddd;
+}
+.homepageLinkContainer
+{
+	width:100%;
+	height:auto;
+	min-height:120px;
+	text-align:left;
+	box-sizing:border-box;
+	padding:5px;
+}
+.homepageLink
+{
+	width:120px;
+	height:120px;
+	display:inline-block;
+	float:left;
+	-webkit-transition: all .3s ;
+	-moz-transition: all .3s ;
+	-ms-transition: all .3s ;
+	-o-transition: all .3s ;
+	transition: all .3s ;
+	text-align:center;
+	margin:5px;
+	cursor:pointer;
+}
+.homepageLink:hover
+{
+	-webkit-box-shadow: 0px 0px 10px 2px rgba(0,0,0,0.37);
+	-moz-box-shadow: 0px 0px 10px 2px rgba(0,0,0,0.37);
+	box-shadow: 0px 0px 10px 2px rgba(0,0,0,0.37);
+}
+.homepageLink i
+{
+	-webkit-transition: all .3s ;
+	-moz-transition: all .3s ;
+	-ms-transition: all .3s ;
+	-o-transition: all .3s ;
+	transition: all .3s ;
+	float:center;
+	height:40px;
+	margin-top:20px;
+	color:black;
+	width:100%;
+	cursor:pointer;
+}
+.homepageLink i:hover
+{
+	color:#395B9E;
+}
+.homepageLink span
+{
+	-webkit-transition: all .3s ;
+	-moz-transition: all .3s ;
+	-ms-transition: all .3s ;
+	-o-transition: all .3s ;
+	transition: all .3s ;
+	width:100%;
+	height:60px;
+	font-family:'Montserrat',sans-serif;
+	text-align:center;
+	font-size:90%;
+	color:black;
+	cursor:pointer;
+}
+.homepageLink span:hover
+{
+	color:#395B9E;
+}
+/*GESTIONEPRG----------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+#gestionPrgContainer
+{
+	/*width:100%;
+	margin-top:115px;*/
+	height:auto;
+	display:inline-block;
+	position:absolute;
+	top:250;
+	min-width:1300px;
+	left:100;
+	right:100;
+	font-family:'Montserrat',sans-serif;
+	text-align:center;
+}
+.inputContainerGestionPrg
+{
+	width:60%;
+	max-width:60%;
+	margin-left:20%;
+	padding-bottom:20px;
+	text-align:left;
+	height:auto;
+}
+.inputLabelGestionPrg
+{
+	width:100%;
+	height:20px;
+	font-family:'Montserrat',sans-serif;
+	color:gray;
+	font-weight:bold;
+	font-size:80%;
+	margin-bottom:10px;
+}
+.inputGestionPrg
+{
+	border:1px solid #ddd;
+	background-color:white;
+	width:100%;
+	height:40px;
+	padding:10px;
+	font-family:'Montserrat',sans-serif;
+	color:gray;
+	outline:none;
+	transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+.inputGestionPrg:hover
+{
+	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+.textareaNuovoGestionPrg
+{
+	resize: vertical;
+	border:1px solid #ddd;
+	background-color:white;
+	height:40px;
+	padding:10px;
+	font-family:'Montserrat',sans-serif;
+	color:gray;
+	outline:none;
+	width:100%;
+}
+.bottoneConfermaGestionPrg
+{
+	color:#EBEBEB;
+	width:100%;
+	height:40px;
+	float:left;
+	display:inline-block;
+	border:none;
+	background-color:#43738b;
+	font-family:'Montserrat',sans-serif;
+	cursor:pointer;
+	outline:none;
+	padding:5px;
+	margin-top:45px;
+	transition:all .2s;
+	transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+.bottoneConfermaGestionPrg:hover
+{
+	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+#filtriPreLoad
+{
+	box-sizing:border-box;
+	height:300px;
+	width:600px;
+	padding:50px;
+	display:inline-block;
+	font-family:sans-serif;
+	font-size:110%;
+	text-align:center;
+	box-shadow: 10px 10px 10px #D2D2D2;
+	background:#F9F9F9;
+	overflow:hidden;
+}
+.selectFiltro1
+{
+	float:left;
+	cursor:pointer;
+	outline:none;
+	display:inline-block;
+	min-width:70%;
+	width:70%;
+	max-width:70%;
+	color:black;
+	background:#F9F9F9;
+	height:30px;
+	border:1px solid gray;
+	border-radius:4px;
+	font-weight:normal;
+	font-size:100%;
+	font-family:sans-serif;
+	overflow:hidden;
+	margin-right:0px;
+}
+#btnAttivitaGruppo
+{
+	display:inline-block;
+	height:30px;
+	width:30px;
+	background:transparent;
+	outline:none;
+	background-image: url("../images/plus.png");
+	background-position: center center;
+	background-repeat: no-repeat;
+	border:none;
+	float:right;
+	cursor: pointer;
+}
+#btnAttivitaGruppo:hover
+{
+	background-image: url("../images/plus.png");
+	background-position: center center;
+	background-repeat: no-repeat;
+	border:none;
+	border-bottom:2px solid gray;
+	box-sizing:border-box;
+}
+#popupAttivitaGruppo
+{
+	line-height:20px;
+	font-family:sans-serif;
+	height:auto;
+	max-height:500px;
+	overflow:auto;
+	background:white;
+	box-shadow: 2px 2px 5px gray;
+	display:none;
+	position:absolute;
+	z-index:1;
+	text-align:left;
+	padding:15px;
+	font-size:80%;
+}
+#btnConferma
+{
+	margin-top:30px;
+	height:40px;
+	line-height:30px;
+	width:400px;
+	cursor:pointer;
+	background:transparent;
+	border: 2px solid #3367d6;
+	color:#3367d6;
+	font-family: 'Montserrat', sans-serif;
+	opacity:0.8;
+	font-size:100%;
+	outline:none;
+}
+#btnConferma:hover
+{
+	opacity:1;
+	box-shadow: 2px 2px 5px gray;
+	font-weight:bold;
+}
+#btnConferma:active
+{
+	opacity:1;
+	box-shadow: 2px 2px 5px gray;
+	font-weight:bold;
+}
+/*PRESENZEDITTE----------------------------------------------------------------------------------------------------------------------------------------------------------*/
+#hiddenContainerReport
+{
+	display:none;
+}
+#containerPresenzeDitte
+{
+	padding:20px;
+	height:520px;
+	width:1000px;
+	background:transparent;
+	border:1px solid #ddd;
+	-webkit-box-shadow: 0 0 5px gray;
+    box-shadow: 0 0 5px gray;
+	float:center;
+	display:inline-block;
+}
+#elencoRegistrazioni
+{
+	height:100%;
+	width:320px;
+	overflow-y:auto;
+	overflow-x:hidden;
+	display:inline-block;
+	float:left;
+	text-align:left;
+	background:#F9F9F9;
+	border:1px solid #ddd;
+	box-sizing:border-box;
+}
+#myTableElencoRegistrazioni 
+{
+	border-collapse: collapse;
+	width:100%;
+	border: none;
+}
+#myTableElencoRegistrazioni th
+{
+	background:#ddd;
+	opacity:0.7;
+	text-align: center;
+	border-bottom: 1px solid gray;
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-top: 7px;
+	padding-bottom: 7px;
+	font-size:80%;
+	font-family: 'Montserrat', sans-serif;
+	color:black;
+	z-index:-1;
+}
+#myTableElencoRegistrazioni tr
+{
+	-webkit-transition: all 0.5s;
+    transition: all 0.5s;
+	cursor:pointer;
+}
+#myTableElencoRegistrazioni tr:hover
+{
+	background:#CCE5FF;
+}
+#myTableElencoRegistrazioni tr:hover .btnSelezionaRegistrazione
+{
+	opacity:1;
+	background-image: url("../images/selectBlue.png");
+	background-position: 10px center ;
+	background-repeat: no-repeat;
+}
+#myTableElencoRegistrazioni td 
+{
+	text-align: center;
+	border-bottom: 1px solid #ddd;
+	padding-left: 5px;
+	padding-right: 5px;
+	font-size:70%;
+	font-family: 'Montserrat', sans-serif;
+	color:gray;
+	word-wrap: break-word;
+}
+#textAreaNoteRegistrazione
+{
+	resize: horizontal;  
+	height:60px;
+	width:320px;
+	font-family: 'Montserrat', sans-serif;
+	border:1px solid #C0C0C0;
+	background:#F9F9F9;
+	padding:5px;
+	color:gray;
+	text-align:left;
+	border-radius:5px;
+	outline:none;
+	margin-top:20px;
+}
+.btnSelezionaRegistrazione
+{
+	box-sizing:border-box;
+	height:35px;
+	width:35px;
+	background:transparent;
+	display:inline-block;
+	cursor:pointer;
+	border:none;
+	outline:none;
+	background-image: url("../images/select.png");
+	background-position: center center;
+	background-repeat: no-repeat;
+	-webkit-transition: all 0.5s;
+    transition: all 0.5s;
+	opacity:0.7;
+}
+.btnSelezionaRegistrazione:hover
+{
+	opacity:1;
+	background-image: url("../images/selectBlue.png");
+	background-position: 10px center ;
+	background-repeat: no-repeat;
+}
+.btnSelezionaRegistrazioneClicked
+{
+	box-sizing:border-box;
+	height:35px;
+	width:35px;
+	background:transparent;
+	display:inline-block;
+	cursor:pointer;
+	border:none;
+	outline:none;
+	opacity:1;
+	background-image: url("../images/selectBlue.png");
+	background-position: 10px center ;
+	background-repeat: no-repeat;
+	-webkit-transition: all 0.5s;
+    transition: all 0.5s;
+	opacity:1;
+}
+#datiRegistrazione
+{
+	height:100%;
+	width:660px;
+	overflow:hidden;
+	display:inline-block;
+	float:right;
+	text-align:left;
+	background:transparent;
+	margin-left:20px;
+	box-sizing:border-box;
+}
+#intestazioneDatiRegistrazione
+{
+	text-align:center;
+	width:100%;
+	height:30px;
+	-webkit-box-shadow: 0px 0px 5px 2px rgba(154,152,152,1);
+	-moz-box-shadow: 0px 0px 5px 2px rgba(154,152,152,1);
+	box-shadow: 0px 0px 5px 2px rgba(154,152,152,1);
+	display:inline-block;
+	line-height:30px;
+	font-family: 'Montserrat', sans-serif;
+	color:gray;
+	font-weight:bold;
+	font-size:95%;
+}
+#funzioniRegistrazione
+{
+	text-align:left;
+	width:100%;
+	height:30px;
+	display:inline-block;
+	line-height:30px;
+	padding-left:5px;
+	padding-right:5px;
+	box-sizing:border-box;
+	background-color:#ddd;
+	font-family: 'Montserrat', sans-serif;
+	color:gray;
+	font-weight:bold;
+	font-size:80%;
+}
+.btnFunzioniRegistrazioni
+{
+	margin-left:5px;
+	margin-right:5px;
+	color:gray;
+}
+.inputTesto
+{
+	height:30px;
+	width:320px;
+	font-family: 'Montserrat', sans-serif;
+	border:1px solid #C0C0C0;
+	background:#F9F9F9;
+	padding-left:5px;
+	padding-right:5px;
+	color:gray;
+	text-align:left;
+	border-radius:5px;
+	outline:none;
+}
+.btnEliminaRigaRegistrazione
+{
+	float:right;
+	height:16px;
+	width:16px;
+	display:inline-block;
+	outline:none;
+	border:none;
+	background:transparent;
+	cursor:pointer;
+	background-image: url("../images/delete.png");
+	background-position: center center;
+	background-repeat: no-repeat;
+}
+.btnEliminaRigaRegistrazione:hover
+{
+	background-image: url("../images/deleteRed.png");
+	background-position: center center;
+	background-repeat: no-repeat;
+}
+.titoliElenchi
+{
+    margin-top: 30px;
+    margin-left: 0px;
+    display: inline-block;
+    float: left;
+	height:30px;
+	width:320px;
+	font-family: 'Montserrat', sans-serif;
+	color:gray;
+	text-align:left;
+	font-size:90%;
+	font-weight:bold;
+}
+#titoloData
+{
+	margin-top:30px;
+	margin-right:0px;
+	display:inline-block;
+	float:right;
+	height:30px;
+	width:320px;
+	font-family: 'Montserrat', sans-serif;
+	color:gray;
+	text-align:left;
+	font-size:90%;
+	font-weight:bold;
+}
+#dataRegistrazione
+{
+	margin-top:17px;
+	margin-right:0px;
+	display:inline-block;
+	float:right;
+}
+#elencoDitte
+{
+    height:142px;
+    width:320px;
+    margin-top:10px;
+	margin-bottom:10px;
+    margin-left:0px;
+	border:1px solid #ddd;
+	display:inline-block;
+	float:left;
+	overflow:auto;
+	background:#F9F9F9;
+	font-family:Montserrat,sans-serif;
+	box-sizing:border-box;
+	color:gray;
+	font-size:90%;
+	text-align:center;
+	font-weight:bold;
+}
+#myTableElencoDitte
+{
+	width:100%;
+	height:auto;
+	border-collapse: collapse;
+	border: none;
+}
+#myTableElencoDitte th
+{
+	font-family:Montserrat,sans-serif;
+	color:gray;
+	font-size:70%;
+	text-align:left;
+	font-weight:bold;
+	background:#ddd;
+	opacity:0.7;
+	border-bottom:1px solid gray;
+	color:black;
+	padding: 5px;
+}
+#myTableElencoDitte td
+{
+	font-family:Montserrat,sans-serif;
+	color:gray;
+	font-size:60%;
+	text-align:left;
+	font-weight:normal;
+	padding: 5px;
+	border-bottom:1px solid #ddd;
+	word-wrap: break-word;
+}
+.righeDitte
+{
+	cursor:pointer;
+}
+.righeDitte:hover
+{
+	background:#CCE5FF;
+}
+/*
+#listaDitte 
+{
+	background:#F9F9F9;
+    padding-left:25px;
+    height:160px;
+    width:273px;
+    font-family:Montserrat,sans-serif;
+    line-height:20px;
+    margin-top:10px;
+    margin-left:30px;
+    display:inline-block;
+    float:left;
+    font-size:80%;
+    color:gray;
+    border:1px solid #ddd;
+    overflow-x:hidden;
+    overflow-x:auto;
+}
+.liListaDitte 
+{
+    cursor:pointer;
+}
+.liListaDitte:hover 
+{
+    background: #CCE5FF;
+}*/
+#elencoPonti
+{
+	margin-top:210px;
+	margin-left:-320px;
+	border:1px solid #ddd;
+	display:inline-block;
+	float:left;
+	height:142px;
+	width:320px;
+	overflow:auto;
+	background:#F9F9F9;
+	font-family:Montserrat,sans-serif;
+	box-sizing:border-box;
+	color:gray;
+	font-size:90%;
+	text-align:center;
+	font-weight:bold;
+}
+#myTableElencoPonti
+{
+	width:100%;
+	height:auto;
+	border-collapse: collapse;
+	border: none;
+}
+#myTableElencoPonti th
+{
+	font-family:Montserrat,sans-serif;
+	color:gray;
+	font-size:70%;
+	text-align:left;
+	font-weight:bold;
+	background:#ddd;
+	opacity:0.7;
+	border-bottom:1px solid gray;
+	color:black;
+	padding: 5px;
+}
+#myTableElencoPonti td
+{
+	font-family:Montserrat,sans-serif;
+	color:gray;
+	font-size:60%;
+	text-align:left;
+	font-weight:normal;
+	padding: 5px;
+	border-bottom:1px solid #ddd;
+	word-wrap: break-word;
+}
+.righePonte
+{
+	cursor:pointer;
+}
+.righePonte:hover
+{
+	background:#CCE5FF;
+}
+#nuovoPonte
+{
+	height:16px;
+	width:16px;
+	display:inline-block;
+	outline:none;
+	border:none;
+	background:transparent;
+	cursor:pointer;
+	background-image: url("../images/plus2.png");
+	background-position: center center;
+	background-repeat: no-repeat;
+}
+#cancellaPonte
+{
+	height:16px;
+	width:16px;
+	display:inline-block;
+	outline:none;
+	border:none;
+	background:transparent;
+	cursor:pointer;
+	background-image: url("../images/delete.png");
+	background-position: center center;
+	background-repeat: no-repeat;
+}
+#elencoOperatori
+{
+	box-sizing:border-box;
+	border:1px solid #ddd;
+	display:inline-block;
+	float:left;
+	margin-top:10px;
+	margin-left:20px;
+	height:300px;
+	width:320px;
+	overflow:auto;
+	background:#F9F9F9;
+}
+#myTableElencoOperatori
+{
+	width:100%;
+	height:auto;
+	border-collapse: collapse;
+	border: none;
+}
+#myTableElencoOperatori th
+{
+	font-family:Montserrat,sans-serif;
+	color:gray;
+	font-size:70%;
+	text-align:left;
+	font-weight:bold;
+	background:#ddd;
+	opacity:0.7;
+	border-bottom:1px solid gray;
+	color:black;
+	padding: 5px;
+}
+#myTableElencoOperatori td
+{
+	font-family:Montserrat,sans-serif;
+	color:gray;
+	font-size:60%;
+	text-align:left;
+	font-weight:normal;
+	padding: 5px;
+	border-bottom:1px solid #ddd;
+	word-wrap: break-word;
+}
+.rigaOperatore:hover
+{
+	background:#CCE5FF;
+}
+#cancellaOperatore
+{
+	height:16px;
+	width:16px;
+	display:inline-block;
+	outline:none;
+	border:none;
+	background:transparent;
+	cursor:pointer;
+	background-image: url("../images/delete.png");
+	background-position: center center;
+	background-repeat: no-repeat;
+}
+#nuovoOperatore
+{
+	height:16px;
+	width:16px;
+	display:inline-block;
+	outline:none;
+	border:none;
+	background:transparent;
+	cursor:pointer;
+	background-image: url("../images/plus2.png");
+	background-position: center center;
+	background-repeat: no-repeat;
+}
+.selectOperatori
+{
+	height:20px;
+	line-height:20px;
+	font-family: 'Montserrat', sans-serif;
+	border:1px solid #C0C0C0;
+	background:#F9F9F9;
+	color:gray;
+	text-align:left;
+	border-radius:2px;
+	outline:none;
+}
+#divBottoniRegistrazioni
+{
+	padding:0px;
+	margin-top:20px;
+	margin-left:0px;
+	height:47px;
+	background:transparent;
+	display:inline-block;
+	width:auto;
+}
+.btnRegistrazioni
+{
+	height:40px;
+	width:197.5px;
+	display:inline-block;
+	box-sizing:border-box;
+	border:1px solid #A0A0A0;
+	font-family: 'Montserrat', sans-serif;
+	text-align:center;
+	color:gray;
+	background:transparent;
+	cursor:pointer;
+	-webkit-transition: all 0.5s;
+    transition: all 0.5s;
+	margin-left:0px;
+	outline:none;
+}
+.btnRegistrazioni:hover
+{
+	-webkit-box-shadow: 0 0 5px #5B67D4;
+    box-shadow: 0 0 5px #5B67D4;
+	font-weight:bold;
+	color:#5B67D4;
+}
+#btnElimina,#btnNuova
+{
+	margin-left:29.5px;
+}
+/*--------------------------------------------------------------------------------------------------------*/
+/* The Modal (background) */
+.modal 
+{
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 99; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    -webkit-animation-name: fadeIn; /* Fade in the background */
+    -webkit-animation-duration: 0.4s;
+    animation-name: fadeIn;
+    animation-duration: 0.4s
+}
+/* Modal Content */
+.modal-content 
+{
+    position: fixed;
+    bottom: 0;
+    background-color: #fefefe;
+    width: 100%;
+    -webkit-animation-name: slideIn;
+    -webkit-animation-duration: 0.4s;
+    animation-name: slideIn;
+    animation-duration: 0.4s;
+	height:190px;
+}
+
+/* The Close Button */
+.closeModal
+{
+	margin-top:10px;
+	margin-right:10px;
+	text-align:center;
+	width:50px;
+	outline:none;
+	height:25px;
+	display:inline-block;
+	float:right;
+	background:transparent;
+	border:none;
+	cursor:pointer;
+	background-image: url("../images/crossWhite.png");
+	background-position: center center;
+	background-repeat: no-repeat;
+	-webkit-transition: all .5s;
+    transition: all .5s;
+}
+.closeModal:hover
+{
+	background:red;
+	background-image: url("../images/crossWhite.png");
+	background-position: center center;
+	background-repeat: no-repeat;
+}
+
+.modal-header 
+{
+	box-sizing:border-box;
+	padding-left:60px;
+	height:45px;
+    background-color: #12365A;
+    color: white;
+	font-family:'Montserrat',sans-serif;
+	font-size:70%;
+	position:fixed;
+	bottom:145;
+	left:0;
+	right:0;
+}
+
+.modal-body 
+{
+	height:100px;
+	position:fixed;
+	bottom:45;
+	left:0;
+	right:0;
+}
+
+.modal-footer 
+{
+	height:45px;
+	position:fixed;
+	bottom:0;
+	left:0;
+	right:0;
+    background-color: #12365A;
+}
+
+/* Add Animation */
+@-webkit-keyframes slideIn {
+    from {bottom: -300px; opacity: 0} 
+    to {bottom: 0; opacity: 1}
+}
+
+@keyframes slideIn {
+    from {bottom: -300px; opacity: 0}
+    to {bottom: 0; opacity: 1}
+}
+
+@-webkit-keyframes fadeIn {
+    from {opacity: 0} 
+    to {opacity: 1}
+}
+
+@keyframes fadeIn {
+    from {opacity: 0} 
+    to {opacity: 1}
+}
+.btnModal
+{
+	margin-top:5px;
+	color:white;
+	cursor:pointer;
+	height:35px;
+	width:100px;
+	background-color:#12365A;
+	font-family:'Montserrat',sans-serif;
+	border:1px solid #5A7795;
+	font-weight:bold;
+	margin-left:10px;
+	margin-right:10px;
+	-webkit-transition: all .5s;
+    transition: all .5s;
+	-webkit-box-shadow: 0 0 5px #727272;
+    box-shadow: 0 0 5px #727272;
+}
+.btnModal:hover
+{
+	opacity:0.4;
+	-webkit-box-shadow: 0 0 0px #12365A;
+    box-shadow: 0 0 0px #12365A;
+}
+#dataDuplicaRegistrazione,#dataNuovaRegistrazione,#selectDitte,#selectPonte,#selectOperatore
+{
+	margin-top:35px;
+}
+/*INS ANAGRAF--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+.funcionListContainer
+{
+	position:absolute;
+	left:0;
+	right:0;
+	top:240;
+	height:100px;
+	width:100%;
+	display:inline-block;
+	background-color:#2B586F;
+	text-align:center;
+}
+.functionList
+{
+	width:1300px;
+	height:100px;
+	text-align:left;
+	display:inline-block;
+	float:center;
+}
+.btnFunctionList
+{
+	display:inline-block;
+	float:left;
+	margin-top:30px;
+	margin-left:10px;
+	margin-right:10px;
+	width:200px;
+	height:40px;
+	overflow:hidden;
+	background:#2B586F;
+	background: linear-gradient(to left, #2B586F 50%, #EBEBEB 50%);
+    background-size: 200% 100%;
+    background-position:right bottom;
+	border:1px solid #EBEBEB;
+	cursor:pointer;
+	font-family: 'Montserrat',sans-serif;
+	color:#EBEBEB;
+	transition:all .5s;
+	-moz-transition-property: all;  
+	-moz-transition-duration: .5s;
+	text-align:center;
+	outline:none;
+	box-sizing:border-box;
+	-webkit-box-shadow: 0px 0px 12px 2px #2f444e;
+    box-shadow: 0px 0px 12px 2px #2f444e;
+	-moz-box-shadow: 0px 0px 12px 2px #2f444e;
+}
+.btnFunctionList:hover
+{
+	color:#2B586F;
+	background-position:left bottom;
+}
+.btnFunctionListActive
+{
+	display:inline-block;
+	float:left;
+	margin-top:30px;
+	margin-left:10px;
+	margin-right:10px;
+	width:200px;
+	height:40px;
+	overflow:hidden;
+	background:#EBEBEB;
+	border:1px solid #EBEBEB;
+	background: linear-gradient(to left, #EBEBEB 50%, #2B586F 50%);
+    background-size: 200% 100%;
+    background-position:right bottom;
+	cursor:pointer;
+	font-family: 'Montserrat',sans-serif;
+	color:#2B586F;
+	transition:all .5s;
+	-moz-transition-property: all;  
+	-moz-transition-duration: .5s;
+	text-align:center;
+	outline:none;
+	box-sizing:border-box;
+	-webkit-box-shadow: 0px 0px 12px 2px #2f444e;
+    box-shadow: 0px 0px 12px 2px #2f444e;
+	-moz-box-shadow: 0px 0px 12px 2px #2f444e;
+}
+.btnFunctionListActive:hover
+{
+	color:#EBEBEB;
+	background-position:left bottom;
+}
+#containerAnagrafiche
+{
+	width:100%;
+	height:auto;
+	transition:all .3s;
+	-moz-transition-property: all;  
+	-moz-transition-duration: .3s;
+	margin-top:140px;
+}
+#myTableGestioneAnagrafiche br
+{
+	display:none;
+}
+#myTableGestioneAnagrafiche
+{
+	border-collapse: collapse;
+	width:100%;
+	border: none;
+}
+#myTableGestioneAnagrafiche th
+{
+	font-family: 'Montserrat', sans-serif;
+	text-align:left;
+	color:gray;
+	padding:10px;
+	background-color:#ddd;
+}
+#myTableGestioneAnagrafiche td
+{
+	border-bottom:1px solid #ddd;
+	font-family: sans-serif;
+	text-align:left;
+	color:gray;
+	padding:5px 10px;
+	font-size:90%;
+}
+#myTableGestioneAnagrafiche tr:hover
+{
+	background-color:#ddd;
+}
+.fas,.far,.fal
+{
+	cursor:pointer;
+}
+.transparentSelectAnagrafiche
+{
+	background-color:transparent;
+	border:none;
+	font-family:'Montserrat',sans-serif;
+	outline:none;
+	width:auto;
+	cursor:pointer;
+	color:gray;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
