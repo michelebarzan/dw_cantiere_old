@@ -44,7 +44,7 @@
 					{
 						$new_id_registrazione=$row['id_registrazione'];
 					}
-					$q2="INSERT INTO [dbo].[cantiere_ponti_ditte_registrazioni]([ditta],[ponte],[registrazione],[operatore],[ore]) SELECT [ditta],[ponte],'$new_id_registrazione',[operatore],[ore] FROM [dbo].[cantiere_ponti_ditte_registrazioni] WHERE registrazione=$id_registrazione";
+					$q2="INSERT INTO [dbo].[cantiere_ponti_ditte_registrazioni]([ditta],[ponte],[registrazione],[operatore],[ore],[utente]) SELECT [ditta],[ponte],'$new_id_registrazione',[operatore],[ore],".getIdUtente($conn,$_SESSION['Username'])." FROM [dbo].[cantiere_ponti_ditte_registrazioni] WHERE registrazione=$id_registrazione";
 					$r2=sqlsrv_query($conn,$q2);
 					if($r2==FALSE)
 					{

@@ -8,7 +8,12 @@
 	$ponte=$_REQUEST['ponte'];
 	$id_operatore=$_REQUEST['id_operatore'];
 
-	$queryPonte="SELECT TOP(1) cantiere_ponti_ditte_registrazioni.*,cantiere_ditte.nome AS nomeDitta,cantiere_operatori_ditte.nome,cantiere_operatori_ditte.cognome FROM cantiere_ponti_ditte_registrazioni,cantiere_ditte,cantiere_operatori_ditte WHERE cantiere_ponti_ditte_registrazioni.ditta=cantiere_ditte.id_ditta AND cantiere_ponti_ditte_registrazioni.operatore=cantiere_operatori_ditte.id_operatore AND registrazione=$id_registrazione AND cantiere_ponti_ditte_registrazioni.ditta=$id_ditta AND ponte='$ponte' AND operatore=$id_operatore";
+	/*$queryPonte="SELECT TOP(1) cantiere_ponti_ditte_registrazioni.*,cantiere_ditte.nome AS nomeDitta,cantiere_operatori_ditte.nome,cantiere_operatori_ditte.cognome 
+	FROM cantiere_ponti_ditte_registrazioni,cantiere_ditte,cantiere_operatori_ditte 
+	WHERE cantiere_ponti_ditte_registrazioni.ditta=cantiere_ditte.id_ditta AND cantiere_ponti_ditte_registrazioni.operatore=cantiere_operatori_ditte.id_operatore AND registrazione=$id_registrazione AND cantiere_ponti_ditte_registrazioni.ditta=$id_ditta AND ponte='$ponte' AND operatore=$id_operatore";*/
+	$queryPonte="SELECT ponte, nome, cognome, ore, ditta, registrazione, id_ponti_ditte_registrazioni, id_operatore, note, username
+				FROM dbo.cantiere_riepilogo_ore_operatori
+				WHERE (ponte = '$ponte') AND (registrazione = $id_registrazione) AND (id_operatore = $id_operatore)";
 	$resultPonte=sqlsrv_query($conn,$queryPonte);
 	if($resultPonte==FALSE)
 	{
@@ -22,7 +27,7 @@
 		{
 			while($rowPonte=sqlsrv_fetch_array($resultPonte))
 			{
-				echo "Operatore ".$rowPonte['nome']." ".$rowPonte['cognome']." gia presente per il ponte ".$rowPonte['ponte']." per la ditta ".$rowPonte['nomeDitta']." per la registrazione $id_registrazione";
+				echo "Operatore ".$rowPonte['nome']." ".$rowPonte['cognome']." gia presente per il ponte ".$rowPonte['ponte']." per la ditta ".$rowPonte['nomeDitta']." per la registrazione $id_registrazione";//echo $queryPonte;
 			}
 		}
 		else

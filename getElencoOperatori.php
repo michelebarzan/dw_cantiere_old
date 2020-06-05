@@ -16,7 +16,7 @@
 			echo "<th>Utente</th>";
 			echo "<th></th>";
 		echo "</tr>";
-		$queryOperatore="SELECT * FROM cantiere_riepilogo_ore_operatori WHERE ditta =$id_ditta AND ponte='$ponte' AND registrazione=$id_registrazione";
+		$queryOperatore="SELECT * FROM cantiere_riepilogo_ore_operatori WHERE ditta =$id_ditta AND ponte='$ponte' AND registrazione=$id_registrazione";//echo $queryOperatore;
 		$resultOperatore=sqlsrv_query($conn,$queryOperatore);
 		if($resultOperatore==FALSE)
 		{
