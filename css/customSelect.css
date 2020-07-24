@@ -1,0 +1,139 @@
+.swal2-title
+{
+    font-family: 'Montserrat',sans-serif;
+    font-weight: normal;
+}
+/*----------------------------------------------*/
+.custom-select-outer-container
+{
+	z-index: 99;
+    position: absolute;
+    background-color: white;
+    display: none;
+    margin-top: 2px;
+    border-radius: 2px;
+    max-height: 250px;
+    flex-direction: column;
+    box-sizing: border-box;
+	align-items:flex-start;
+	overflow: hidden;
+    justify-content: flex-start;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    box-sizing: border-box;
+}
+.custom-select-input-search
+{
+	width:calc(100% - 10px);
+	height: 25px;
+	min-height: 25px;
+    margin: 5px;
+    outline: none;
+    border:1px solid #ddd;
+    border-radius: 2px;
+    transition: all 0.15s cubic-bezier(.25,.8,.25,1);
+	color:#5a5a5a;
+	font-family: 'Montserrat',sans-serif;
+	font-size: 12px;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+.custom-select-inner-container
+{
+	max-height: 180px;
+	min-height: 180px;
+	height: 180px;
+	display: flex;
+	flex-direction: column;
+    box-sizing: border-box;
+    align-items:flex-start;
+	justify-content: flex-start;
+	width: 100%;
+	overflow-x: hidden;
+    overflow-y: auto;
+}
+.custom-select-option
+{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    transition: all 0.15s cubic-bezier(.25,.8,.25,1);
+    box-sizing: border-box;
+    padding: 5px;
+	height:24px;
+	min-height:24px;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    background-color: transparent;
+}
+.custom-select-option:first-child
+{
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+}
+.custom-select-option:last-child
+{
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+}
+.custom-select-option:hover
+{
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    background-color: rgb(48, 133, 214);
+    color:white;
+}
+.custom-select-checkbox
+{
+    margin-right: 5px;
+    width:15px;
+    font-size: 15px;
+}
+.custom-select-span
+{
+    width:calc(100% - 20px);
+    font-family: 'Montserrat',sans-serif;
+    font-weight: normal;
+    font-size: 12px;
+    text-align: left;
+}
+.custom-select-confirm-button
+{
+    width:calc(100% - 10px);
+	height: 25px;
+	min-height: 25px;
+    margin: 5px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    outline: none;
+    /*background-color: #ebebeb;*/
+    background-color: transparent;
+    border:1px solid #ddd;
+    border-radius: 2px;
+    transition: all 0.15s cubic-bezier(.25,.8,.25,1);
+    cursor: pointer;
+    color:#5a5a5a;
+}
+.custom-select-confirm-button:hover
+{
+    background-color: #ececec96;
+}
+.custom-select-confirm-button:active
+{
+    color: rgb(48, 133, 214);
+}
+.custom-select-confirm-button span
+{
+    font-family: 'Montserrat',sans-serif;
+    font-weight: bold;
+    font-size: 12px;
+    text-align: left;
+}
+.custom-select-confirm-button i
+{
+    margin-left: 5px;
+    font-weight: bold;
+}

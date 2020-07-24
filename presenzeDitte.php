@@ -12,9 +12,12 @@
 		<link rel="shortcut icon" type="image/x-icon" href="images/logo.png" />
 		<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 		<script src="struttura.js"></script>
-		<script src="presenzeDitte.min.js"></script>
+		<script src="js/presenzeDitte.js"></script>
+		<link rel="stylesheet" href="css/presenzeDitte.css" />
 		<link rel="stylesheet" href="css/styleV15.css" />
-		<link rel="stylesheet" href="fontawesomepro/css/fontawesomepro.css" />
+		<link rel="stylesheet" href="css/customSelect.css" />
+		<script src="https://kit.fontawesome.com/4462bc49a0.js" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 		<script src="tableToExcel.js"></script>
 	</head>
 	<body onload="aggiungiNotifica('Stai lavorando sulla commessa <?php echo $_SESSION['commessa']; ?>');getElencoRegistrazioni();">
@@ -64,10 +67,14 @@
 					<h2>Scegli la ditta da aggiungere</h2>
 				</div>
 				<div class="modal-body">
-					<select id='selectDitte' class='inputTesto' >
+					<!--<button class="rcb-button-text-icon" id="btnCustomSelectditte" onclick="getCustomSelect(this,'ditte')">
+						<span>Scegli ditte</span>
+						<i class="fad fa-print-search" style="margin-left:5px"></i>
+					</button>-->
+					<!--<select id='selectDitte' class='inputTesto' >
 						<option value='' disabled selected>Scegli ditta</option>
-						<?php getListaDitte($conn); ?>
-					</select>
+						<?php //getListaDitte($conn); ?>
+					</select>-->
 				</div>
 				<div class="modal-footer">
 					<input type='button' id='btnConfermaModalAggiungiDitta' class='btnModal' onclick='aggiungiDitta(document.getElementById("selectDitte").value);chiudiPopupAggiungiDitta()' value='Conferma' />
@@ -145,19 +152,19 @@
 							</div>
 							<div class="titoliElenchi" style="margin-top:17px">
 								<div style="width:150px;height:30px;line-height:30px;display:inline-block;float:left;text-align:left;">Ditte coinvolte</div>
-								<div style="width:150px;height:30px;display:inline-block;float:right;text-align:right;"><i style="cursor:pointer" title="Aggiungi ditta" onclick="apriPopupAggiungiDitta()" class="fal fa-plus-circle fa-2x"></i></div>
+								<div style="width:150px;height:30px;display:inline-block;float:right;text-align:right;"><i style="cursor:pointer" title="Aggiungi ditta" onclick="/*apriPopupAggiungiDitta()*/getCustomSelect(this,'ditte')" class="fal fa-plus-circle fa-2x"></i></div>
 							</div>
 							<input type='date' id='dataRegistrazione' class='inputTesto' onfocusout="cambiaDataRegistrazione()" value='' />
 							<div id='elencoDitte'></div>
 						</div>
 						<div class="titoliElenchi" style="margin-top:170px;margin-left:-320px;display:inline-block;float:left;">
 							<div style="width:150px;height:30px;line-height:30px;display:inline-block;float:left;text-align:left;">Ponti coinvolti</div>
-							<div style="width:150px;height:30px;display:inline-block;float:right;text-align:right;"><i style="cursor:pointer" title="Aggiungi ponte" onclick="apriPopupAggiungiPonte()" class="fal fa-plus-circle fa-2x"></i></div>
+							<div style="width:150px;height:30px;display:inline-block;float:right;text-align:right;"><i style="cursor:pointer" title="Aggiungi ponte" onclick="/*apriPopupAggiungiPonte()*/getCustomSelect(this,'ponti')" class="fal fa-plus-circle fa-2x"></i></div>
 						</div>
 						<div id='elencoPonti'></div>
 						<div class="titoliElenchi" style="margin-left:20px;margin-top:12px">
 							<div style="width:150px;height:30px;line-height:30px;display:inline-block;float:left;text-align:left;">Operatori coinvolti</div>
-							<div style="width:150px;height:30px;display:inline-block;float:right;text-align:right;"><i style="cursor:pointer" title="Aggiungi operatore" onclick="apriPopupAggiungiOperatore()" class="fal fa-plus-circle fa-2x"></i></div>
+							<div style="width:150px;height:30px;display:inline-block;float:right;text-align:right;"><i style="cursor:pointer" title="Aggiungi operatore" onclick="/*apriPopupAggiungiOperatore()*/getCustomSelect(this,'operatori')" class="fal fa-plus-circle fa-2x"></i></div>
 						</div>
 						<div id='elencoOperatori'></div>
 						<div id='divBottoniRegistrazioni'>

@@ -29,6 +29,27 @@
 /*FUNZIONI-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 	function getElencoRegistrazioni()
 	{
+		Swal.fire
+        ({
+            title: "Caricamento in corso... ",
+            background:"rgba(0,0,0,0.4)",
+            html: '<i style="color:#ddd" class="fad fa-spinner-third fa-spin fa-3x"></i>',
+            showConfirmButton:false,
+            showCloseButton:false,
+            allowEscapeKey:false,
+            allowOutsideClick:false,
+            onOpen : function()
+            {
+                document.getElementsByClassName("swal2-title")[0].style.color="white";
+                document.getElementsByClassName("swal2-title")[0].style.fontSize="14px";
+                document.getElementsByClassName("swal2-title")[0].style.fontWeight="normal";
+                document.getElementsByClassName("swal2-container")[0].style.padding="0px";
+                document.getElementsByClassName("swal2-popup")[0].style.padding="0px";
+                document.getElementsByClassName("swal2-popup")[0].style.height="100%";
+                document.getElementsByClassName("swal2-popup")[0].style.maxWidth="100%";document.getElementsByClassName("swal2-popup")[0].style.minWidth="100%";document.getElementsByClassName("swal2-popup")[0].style.width="100%";
+            }
+		});
+
 		svuotaValoriNull();
 		dittaSelezionata="";
 		ponteSelezionato="";
@@ -44,6 +65,7 @@
 			if (this.readyState == 4 && this.status == 200) 
 			{
 				document.getElementById("elencoRegistrazioni").innerHTML  =this.responseText;
+				Swal.close();
 			}
 		};
 		xmlhttp.open("POST", "getElencoRegistrazioni.php?", true);
@@ -721,5 +743,451 @@
 			};
 			xmlhttp.open("POST", "getTabellaReport.php?id_registrazione="+registrazioneVisualizzata, true);
 			xmlhttp.send();
+		}
+	}
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+	var customSelectItems=[];
+	var selected=[];
+
+	async function getCustomSelect(button,data_source)
+	{
+		closeCustomSelect();
+
+		var alert=false;
+		if(data_source=="ditte")
+		{
+			if(registrazioneVisualizzata=='' || registrazioneVisualizzata==null)
+			{
+				alert=true;
+				var alertMessage="Seleziona una registrazione";
+			}
+		}
+		if(data_source=="ponti")
+		{
+			if(registrazioneVisualizzata=='' || registrazioneVisualizzata==null || dittaSelezionata=='' || dittaSelezionata==null)
+			{
+				alert=true;
+				var alertMessage="Seleziona una registrazione e una ditta";
+			}
+		}
+		if(data_source=="operatori")
+		{
+			if(registrazioneVisualizzata=='' || registrazioneVisualizzata==null || dittaSelezionata=='' || dittaSelezionata==null || ponteSelezionato=='' || ponteSelezionato==null )
+			{
+				alert=true;
+				var alertMessage="Seleziona una registrazione, una ditta e un ponte";
+			}
+		}
+
+		if(alert)
+		{
+			Swal.fire({icon:"error",onOpen:function(){document.getElementsByClassName("swal2-title")[0].style.fontSize="15px"},title: alertMessage});
+		}
+		else
+		{
+			if(document.getElementById("customSelect"+data_source)==null)
+			{
+				var selectOuterContainer=document.createElement("div");
+				selectOuterContainer.setAttribute("class","custom-select-outer-container");
+				selectOuterContainer.setAttribute("id","customSelect"+data_source);
+
+				document.body.appendChild(selectOuterContainer);
+				
+				var rect = button.getBoundingClientRect();
+
+				//var width=button.offsetWidth;
+				var buttonHeight=button.offsetHeight;
+
+				var left=rect.left;
+				var top=rect.top+buttonHeight;
+			
+				$("#customSelect"+data_source).show(100,"swing");
+			
+				setTimeout(function(){
+					$("#customSelect"+data_source).css
+					({
+						"left":left+"px",
+						"top":top+"px",
+						"display":"flex",
+						"width":"auto"
+						//"width":width+"px"
+					});
+				}, 120);
+
+				var searchInput=document.createElement("input");
+				searchInput.setAttribute("type","text");
+				searchInput.setAttribute("onkeyup","searchCustomSelect(this.value)");
+				searchInput.setAttribute("class","custom-select-item custom-select-input-search");
+				searchInput.setAttribute("placeholder","Cerca...");
+				selectOuterContainer.appendChild(searchInput);
+
+				var spinner=document.createElement("div");
+				spinner.setAttribute("id","customSelectSpinner");
+				spinner.setAttribute("style","width:100%;display:flex;justify-content:center;align-items:center;flex-direction:row;font-family: 'Montserrat',sans-serif;font-size: 12px;");
+				spinner.innerHTML='<i class="fad fa-spinner fa-spin"></i><span style="margin-left:5px">Caricamento in corso...</span>';
+
+				selectOuterContainer.appendChild(spinner);
+
+				customSelectItems=await getCustomSelectItems(data_source);
+				
+				document.getElementById("customSelectSpinner").remove();
+
+				var innerContainer=document.createElement("div");
+				innerContainer.setAttribute("class","custom-select-item custom-select-inner-container");
+
+				var option=document.createElement("button");
+				option.setAttribute("class","custom-select-item custom-select-option");
+				option.setAttribute("id","customSelectOptionAll");
+				option.setAttribute("value","*");
+				option.setAttribute("checked","false");
+				option.setAttribute("onclick","checkAllOption(this)");
+
+				var checkbox=document.createElement("i");
+				checkbox.setAttribute("class","custom-select-item custom-select-checkbox fal fa-square");
+				checkbox.setAttribute("value","*");
+				option.appendChild(checkbox);
+
+				var span=document.createElement("span");
+				span.setAttribute("class","custom-select-item custom-select-span");
+				span.innerHTML="Seleziona tutto";
+				option.appendChild(span);
+
+				innerContainer.appendChild(option);
+				
+				customSelectItems.forEach(function(item)
+				{
+					var option=document.createElement("button");
+					option.setAttribute("class","custom-select-item custom-select-option");
+					option.setAttribute("value",item.value);
+					option.setAttribute("checked","false");
+					option.setAttribute("onclick","checkOption(this,'"+item.value+"')");
+
+					var checkbox=document.createElement("i");
+					checkbox.setAttribute("class","custom-select-item custom-select-checkbox fal fa-square");
+					checkbox.setAttribute("value",item.value);
+					option.appendChild(checkbox);
+
+					var span=document.createElement("span");
+					span.setAttribute("class","custom-select-item custom-select-span");
+					span.innerHTML=item.label;
+					option.appendChild(span);
+
+					innerContainer.appendChild(option);
+				});
+				
+				selectOuterContainer.appendChild(innerContainer);
+
+				var confirmButton=document.createElement("button");
+				confirmButton.setAttribute("class","custom-select-item custom-select-confirm-button");
+				confirmButton.setAttribute("onclick","getSelects('getSelects"+data_source+"')");
+				var span=document.createElement("span");
+				span.setAttribute("class","custom-select-item");
+				span.innerHTML="Conferma";
+				confirmButton.appendChild(span);
+				var i=document.createElement("i");
+				i.setAttribute("class","custom-select-item fad fa-check-double");
+				confirmButton.appendChild(i);
+
+				selectOuterContainer.appendChild(confirmButton);
+			}
+			else
+			{
+				var rect = button.getBoundingClientRect();
+
+				var width=button.offsetWidth;
+				var buttonHeight=button.offsetHeight;
+
+				var left=rect.left;
+				var top=rect.top+buttonHeight;
+
+				$("#customSelect"+data_source).show(100,"swing");
+				
+				setTimeout(function(){
+					$("#customSelect"+data_source).css
+					({
+						"left":left+"px",
+						"top":top+"px",
+						"display":"flex",
+						"width":"auto"
+						//"width":width+"px"
+					});
+				}, 120);
+			}
+		}
+	}
+	function getCustomSelectItems(data_source)
+	{
+		return new Promise(function (resolve, reject) 
+		{
+			var ditta=null;
+			if(data_source=="operatori")
+				ditta=dittaSelezionata;
+			$.get("getCustomSelectItems.php",
+			{
+				data_source,
+				ditta
+			},
+			function(response, status)
+			{
+				if(status=="success")
+				{
+					if(response.toLowerCase().indexOf("error")>-1 || response.toLowerCase().indexOf("notice")>-1 || response.toLowerCase().indexOf("warning")>-1)
+					{
+						Swal.fire({icon:"error",onOpen:function(){document.getElementsByClassName("swal2-title")[0].style.fontSize="15px"},title: "Errore. Se il problema persiste contatta l' amministratore"});
+						console.log(response);
+						resolve([]);
+					}
+					else
+					{
+						try {
+							resolve(JSON.parse(response));
+						} catch (error) {
+							Swal.fire({icon:"error",onOpen:function(){document.getElementsByClassName("swal2-title")[0].style.fontSize="15px"},title: "Errore. Se il problema persiste contatta l' amministratore"});
+							console.log(error);
+							console.log(response);
+							resolve([]);
+						}
+					}
+				}
+			});
+		});
+	}
+	function closeCustomSelect()
+	{
+		$(".custom-select-outer-container").hide(100,"swing",function()
+		{
+			$(".custom-select-outer-container").remove();
+		});
+	}
+	async function getSelects(fn)
+	{
+		selected=[];
+
+		var options=document.getElementsByClassName("custom-select-option");
+		for (let index = 0; index < options.length; index++) 
+		{
+			const option = options[index];
+			if(option.id!=="customSelectOptionAll")
+			{
+				var checked=option.getAttribute("checked")=="true";
+				if(checked)
+					selected.push(option.value);
+			}
+		}
+
+		closeCustomSelect();
+
+		Swal.fire
+        ({
+            title: "Caricamento in corso... ",
+            background:"rgba(0,0,0,0.4)",
+            html: '<i style="color:#ddd" class="fad fa-spinner-third fa-spin fa-3x"></i>',
+            showConfirmButton:false,
+            showCloseButton:false,
+            allowEscapeKey:false,
+            allowOutsideClick:false,
+            onOpen : function()
+            {
+                document.getElementsByClassName("swal2-title")[0].style.color="white";
+                document.getElementsByClassName("swal2-title")[0].style.fontSize="14px";
+                document.getElementsByClassName("swal2-title")[0].style.fontWeight="normal";
+                document.getElementsByClassName("swal2-container")[0].style.padding="0px";
+                document.getElementsByClassName("swal2-popup")[0].style.padding="0px";
+                document.getElementsByClassName("swal2-popup")[0].style.height="100%";
+                document.getElementsByClassName("swal2-popup")[0].style.maxWidth="100%";document.getElementsByClassName("swal2-popup")[0].style.minWidth="100%";document.getElementsByClassName("swal2-popup")[0].style.width="100%";
+            }
+		});
+		
+		window[fn]();
+	}
+	function checkAllOption(option)
+	{
+		var checked=option.getAttribute("checked")=="true";
+		if(checked)
+		{
+			var options=document.getElementsByClassName("custom-select-option");
+			for (let index = 0; index < options.length; index++)
+			{
+				const option = options[index];
+				var checkbox=option.getElementsByClassName("custom-select-checkbox")[0];
+
+				checkbox.setAttribute("class","custom-select-item custom-select-checkbox fal fa-square");
+				option.setAttribute("checked","false");
+			}
+		}
+		else
+		{
+			var options=document.getElementsByClassName("custom-select-option");
+			for (let index = 0; index < options.length; index++)
+			{
+				const option = options[index];
+				var checkbox=option.getElementsByClassName("custom-select-checkbox")[0];
+				
+				checkbox.setAttribute("class","custom-select-item custom-select-checkbox fad fa-check-square");
+				option.setAttribute("checked","true");
+			}			
+		}
+	}
+	function checkOption(option)
+	{
+		var checked=option.getAttribute("checked")=="true";
+		var checkbox=option.getElementsByClassName("custom-select-checkbox")[0];
+		if(checked)
+		{
+			checkbox.setAttribute("class","custom-select-item custom-select-checkbox fal fa-square");
+			option.setAttribute("checked","false");
+		}
+		else
+		{
+			checkbox.setAttribute("class","custom-select-item custom-select-checkbox fad fa-check-square");
+			option.setAttribute("checked","true");
+		}
+
+		var nSelected=0;
+		var options=document.getElementsByClassName("custom-select-option");
+		for (let index = 0; index < options.length; index++) 
+		{
+			const option = options[index];
+			if(option.id!=="customSelectOptionAll")
+			{
+				var checked=option.getAttribute("checked")=="true";
+				if(checked)
+					nSelected++;
+			}
+		}
+
+		if(nSelected==options.length-1)
+		{
+			var option=document.getElementById("customSelectOptionAll");
+			var checkbox=option.getElementsByClassName("custom-select-checkbox")[0];
+			checkbox.setAttribute("class","custom-select-item custom-select-checkbox fad fa-check-square");
+			option.setAttribute("checked","true");
+		}
+		else
+		{
+			var option=document.getElementById("customSelectOptionAll");
+			var checkbox=option.getElementsByClassName("custom-select-checkbox")[0];
+			checkbox.setAttribute("class","custom-select-item custom-select-checkbox fal fa-square");
+			option.setAttribute("checked","false");
+		}
+	}
+	function searchCustomSelect(value)
+	{
+		$(".custom-select-option").filter(function() {
+			$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+		});
+	}
+	window.addEventListener("click",(function(e) 
+	{
+		if(e.target.className!="fal fa-plus-circle fa-2x" && e.target.className.indexOf("custom-select-item")==-1 && e.target.className!="custom-select-outer-container")
+		{
+			closeCustomSelect();
+		}
+	}));
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+	function getSelectsditte()
+	{
+		if(selected.length==0)
+		{
+			Swal.fire({icon:"error",onOpen:function(){document.getElementsByClassName("swal2-title")[0].style.fontSize="15px"},title: "Nessuna ditta selezionata"});
+		}
+		else
+		{
+			var ditte=JSON.stringify(selected);
+			$.get("insertDittaCantierePontiDitteRegistrazioni.php",
+			{
+				ditte,
+				id_registrazione:registrazioneVisualizzata
+			},
+			function(response, status)
+			{
+				if(status=="success")
+				{
+					if(response.toLowerCase().indexOf("error")>-1 || response.toLowerCase().indexOf("notice")>-1 || response.toLowerCase().indexOf("warning")>-1)
+					{
+						Swal.fire({icon:"error",onOpen:function(){document.getElementsByClassName("swal2-title")[0].style.fontSize="15px"},title: "Errore. Se il problema persiste contatta l' amministratore"});
+						console.log(response);
+					}
+					else
+					{
+						Swal.close();
+						getElencoDitte(registrazioneVisualizzata);
+						if(selected.length==1)
+							setTimeout(function(){ document.getElementById('rigaDitta'+parseInt(selected[0])).click(); }, 300);
+					}
+				}
+			});
+		}
+	}
+	function getSelectsponti()
+	{
+		if(selected.length==0)
+		{
+			Swal.fire({icon:"error",onOpen:function(){document.getElementsByClassName("swal2-title")[0].style.fontSize="15px"},title: "Nessun ponte selezionato"});
+		}
+		else
+		{
+			var ponti=JSON.stringify(selected);
+			$.get("insertPonteCantierePontiDitteRegistrazioni.php",
+			{
+				ponti,
+				id_registrazione:registrazioneVisualizzata,
+				id_ditta:dittaSelezionata
+			},
+			function(response, status)
+			{
+				if(status=="success")
+				{
+					if(response.toLowerCase().indexOf("error")>-1 || response.toLowerCase().indexOf("notice")>-1 || response.toLowerCase().indexOf("warning")>-1)
+					{
+						Swal.fire({icon:"error",onOpen:function(){document.getElementsByClassName("swal2-title")[0].style.fontSize="15px"},title: "Errore. Se il problema persiste contatta l' amministratore"});
+						console.log(response);
+					}
+					else
+					{
+						Swal.close();
+						document.getElementById('rigaDitta'+dittaSelezionata).click();
+						if(selected.length==1)
+							setTimeout(function(){ document.getElementById('rigaPonte'+dittaSelezionata+selected[0]).click(); },300);
+					}
+				}
+			});
+		}
+	}
+	function getSelectsoperatori()
+	{
+		if(selected.length==0)
+		{
+			Swal.fire({icon:"error",onOpen:function(){document.getElementsByClassName("swal2-title")[0].style.fontSize="15px"},title: "Nessun operatore selezionato"});
+		}
+		else
+		{
+			var ponte=ponteSelezionato;
+
+			var operatori=JSON.stringify(selected);
+			$.get("insertOperatoreCantierePontiDitteRegistrazioni.php",
+			{
+				operatori,
+				id_registrazione:registrazioneVisualizzata,
+				id_ditta:dittaSelezionata,
+				ponte
+			},
+			function(response, status)
+			{
+				if(status=="success")
+				{
+					if(response.toLowerCase().indexOf("error")>-1 || response.toLowerCase().indexOf("notice")>-1 || response.toLowerCase().indexOf("warning")>-1)
+					{
+						Swal.fire({icon:"error",onOpen:function(){document.getElementsByClassName("swal2-title")[0].style.fontSize="15px"},title: "Errore. Se il problema persiste contatta l' amministratore"});
+						console.log(response);
+					}
+					else
+					{
+						Swal.close();
+						document.getElementById('rigaDitta'+dittaSelezionata).click();
+						setTimeout(function(){ document.getElementById('rigaPonte'+parseInt(dittaSelezionata)+ponte).click(); },300);
+					}
+				}
+			});
 		}
 	}
