@@ -34,10 +34,13 @@ body
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
+    height: 100%;
+    width: 100%;
 }
 #immagineLogo
 {
     margin-top:50px;
+    min-height: 180px;
 }
 .full-width-action-bar
 {
@@ -111,7 +114,7 @@ body
 {
 	width:calc(100% - 100px);
     margin-top:10px;
-    margin-bottom:90px ;
+    box-sizing: border-box;
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;

@@ -11,6 +11,9 @@ function anagraficaDitte()
 {
     var containerAnagrafiche= document.getElementById("containerAnagrafiche");
     containerAnagrafiche.style.height="";
+    containerAnagrafiche.style.minHeight="";
+    containerAnagrafiche.style.paddingBottom="90px";
+    containerAnagrafiche.style.marginBottom="";
 
     var controlBar=document.getElementById("actionBarInserimentoAnagrafiche");
 
@@ -190,6 +193,9 @@ function anagraficaOperatori()
 {
     var containerAnagrafiche= document.getElementById("containerAnagrafiche");
     containerAnagrafiche.style.height="";
+    containerAnagrafiche.style.minHeight="";
+    containerAnagrafiche.style.paddingBottom="90px";
+    containerAnagrafiche.style.marginBottom="";
 
     var controlBar=document.getElementById("actionBarInserimentoAnagrafiche");
 
@@ -307,6 +313,9 @@ async function assegnazioneOperatori()
     var containerAnagrafiche= document.getElementById("containerAnagrafiche");
     containerAnagrafiche.innerHTML="";
     containerAnagrafiche.style.height="calc(100% - calc(50px + 180px + 10px + 70px + 50px + 40px + 10px + 90px))";
+    containerAnagrafiche.style.minHeight="calc(100% - calc(50px + 180px + 10px + 70px + 50px + 40px + 10px + 90px))";
+    containerAnagrafiche.style.paddingBottom="";
+    containerAnagrafiche.style.marginBottom="90px";
 
     Swal.fire
     ({
