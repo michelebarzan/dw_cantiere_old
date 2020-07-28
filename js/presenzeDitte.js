@@ -801,16 +801,23 @@
 				var left=rect.left;
 				var top=rect.top+buttonHeight;
 			
-				$("#customSelect"+data_source).show(100,"swing");
-			
-				setTimeout(function(){
+				$("#customSelect"+data_source).show();
+				$("#customSelect"+data_source).css
+				({
+					//"left":left+"px",
+					"top":top+"px",
+					"display":"flex",
+					"width":"auto",
+					"visibility":"hidden"
+				});
+				setTimeout(function()
+				{
+					var width=document.getElementById("customSelect"+data_source).offsetWidth;
+					left=left-width;
 					$("#customSelect"+data_source).css
 					({
 						"left":left+"px",
-						"top":top+"px",
-						"display":"flex",
-						"width":"auto"
-						//"width":width+"px"
+						"visibility":"visible"
 					});
 				}, 120);
 
@@ -894,22 +901,26 @@
 			{
 				var rect = button.getBoundingClientRect();
 
-				var width=button.offsetWidth;
-				var buttonHeight=button.offsetHeight;
-
 				var left=rect.left;
 				var top=rect.top+buttonHeight;
-
-				$("#customSelect"+data_source).show(100,"swing");
-				
-				setTimeout(function(){
+			
+				$("#customSelect"+data_source).show();
+				$("#customSelect"+data_source).css
+				({
+					//"left":left+"px",
+					"top":top+"px",
+					"display":"flex",
+					"width":"auto",
+					"visibility":"hidden"
+				});
+				setTimeout(function()
+				{
+					var width=document.getElementById("customSelect"+data_source).offsetWidth;
+					left=left-width;
 					$("#customSelect"+data_source).css
 					({
 						"left":left+"px",
-						"top":top+"px",
-						"display":"flex",
-						"width":"auto"
-						//"width":width+"px"
+						"visibility":"visible"
 					});
 				}, 120);
 			}
@@ -954,10 +965,7 @@
 	}
 	function closeCustomSelect()
 	{
-		$(".custom-select-outer-container").hide(100,"swing",function()
-		{
-			$(".custom-select-outer-container").remove();
-		});
+		$(".custom-select-outer-container").remove();
 	}
 	async function getSelects(fn)
 	{
