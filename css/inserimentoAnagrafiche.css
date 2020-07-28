@@ -434,7 +434,7 @@ body
 }
 .title-container-operatori-inserimento-anagrafiche
 {
-    height: 30px;
+    height: 25px;
     background-color: #404040;
     display: flex;
     flex-direction: row;
@@ -457,12 +457,40 @@ body
 {
     margin-left: auto;
 }
+.search-container-operatori-inserimento-anagrafiche
+{
+	height: 40px;
+    background-color: #404040;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    width: 100%;
+}
+.search-container-operatori-inserimento-anagrafiche input
+{
+	width: calc(100% - 20px);
+	margin-left: 10px;
+	margin-right: 10px;
+	margin-bottom: 10px;
+	height: 25px;
+	margin-top: 5px;
+	border-radius: 3px;
+	background-color: #525252;
+	font-family: 'Montserrat',sans-serif;
+	color:#f1f1f1;
+	font-weight: normal;
+	border:1px solid gray;
+	padding-left: 5px;
+	padding-right: 5px;
+}
 .inner-container-operatori-inserimento-anagrafiche
 {
     margin:5px;
-    height: calc(100% - 40px);
-    max-height: calc(100% - 40px);
-    min-height: calc(100% - 40px);
+    height: calc(100% - 75px);
+    max-height: calc(100% - 75px);
+    min-height: calc(100% - 75px);
     overflow-y: auto;
     width: calc(100% - 10px);
     border-radius: 4px;
@@ -473,7 +501,7 @@ body
     transition: all 0.3s cubic-bezier(.25,.8,.25,1);
     background-color: white;
 }
-.operatori-item
+.operatori-item,.operatori-ditta-item
 {
     cursor: grab;
     width:calc(100% - 10px);
@@ -491,22 +519,22 @@ body
     padding-right: 10px;
 	transition: background-color 0.3s cubic-bezier(.25,.8,.25,1);
 }
-.operatori-item:last-child
+.operatori-item:last-child,.operatori-ditta-item:last-child
 {
     margin-bottom:5px;
 }
-.operatori-item i
+.operatori-item i,.operatori-ditta-item i
 {
     color: #f1f1f1;
 }
-.operatori-item span
+.operatori-item span,.operatori-ditta-item span
 {
     color: #f1f1f1;
     font-size: 12px;
     font-family: 'Montserrat',sans-serif;
     margin-left: 10px;
 }
-.operatori-item:hover
+.operatori-item:hover,.operatori-ditta-item:hover
 {
     background-color: #525252;
 }

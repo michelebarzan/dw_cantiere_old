@@ -429,6 +429,18 @@ async function getOperatoriAssegnazioneOperatori(loading)
     operatoriDittaTitleContainer.innerHTML="<span>Operatori della ditta "+ditta.nome+"</span><span id='nOperatoriDitta'></span>";
     operatoriDittaContainer.appendChild(operatoriDittaTitleContainer);
 
+    var operatoriDittaSearchContainer=document.createElement("div");
+    operatoriDittaSearchContainer.setAttribute("class","search-container-operatori-inserimento-anagrafiche");
+    
+    var search=document.createElement("input");
+    search.setAttribute("type","search");
+    search.setAttribute("onkeyup","searchOperatori(this.value,'operatori-ditta-item')");
+    search.setAttribute("onsearch","searchOperatori(this.value,'operatori-ditta-item')");
+    search.setAttribute("placeholder","Cerca...");
+    operatoriDittaSearchContainer.appendChild(search);
+
+    operatoriDittaContainer.appendChild(operatoriDittaSearchContainer);
+
     var operatoriDittaInnerContainer=document.createElement("div");
     operatoriDittaInnerContainer.setAttribute("class","inner-container-operatori-inserimento-anagrafiche connectedSortable");
     operatoriDittaInnerContainer.setAttribute("id","operatoriDittaContainer");
@@ -437,7 +449,7 @@ async function getOperatoriAssegnazioneOperatori(loading)
     operatori_ditta.forEach(function(operatore)
     {
         var item=document.createElement("div");
-        item.setAttribute("class","operatori-item");
+        item.setAttribute("class","operatori-ditta-item");
 
         item.setAttribute("id_operatore",operatore.id_operatore);
         item.setAttribute("nome",operatore.nome);
@@ -470,6 +482,18 @@ async function getOperatoriAssegnazioneOperatori(loading)
     operatoriTitleContainer.setAttribute("class","title-container-operatori-inserimento-anagrafiche");
     operatoriTitleContainer.innerHTML="<span>Operatori non assegnati</span><span id='nOperatori'></span>";
     operatoriContainer.appendChild(operatoriTitleContainer);
+
+    var operatoriSearchContainer=document.createElement("div");
+    operatoriSearchContainer.setAttribute("class","search-container-operatori-inserimento-anagrafiche");
+    
+    var search=document.createElement("input");
+    search.setAttribute("type","search");
+    search.setAttribute("onkeyup","searchOperatori(this.value,'operatori-item')");
+    search.setAttribute("onsearch","searchOperatori(this.value,'operatori-item')");
+    search.setAttribute("placeholder","Cerca...");
+    operatoriSearchContainer.appendChild(search);
+
+    operatoriContainer.appendChild(operatoriSearchContainer);
 
     var operatoriInnerContainer=document.createElement("div");
     operatoriInnerContainer.setAttribute("class","inner-container-operatori-inserimento-anagrafiche connectedSortable");
@@ -569,6 +593,13 @@ async function getOperatoriAssegnazioneOperatori(loading)
                     }
                 }
     }).disableSelection();
+}
+function searchOperatori(value,itemClass)
+{
+    $("."+itemClass).filter(function()
+    {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
 }
 function getTotaleOperatori()
 {
