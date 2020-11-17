@@ -649,3 +649,13 @@ tbody
 	height:95px;
 	padding:5px;
 }
+#selectOrdinamentoPrg
+{
+	background-color: transparent;
+	border:none;
+	font-family:'Montserrat',sans-serif;
+    font-size:12px;
+	font-weight: normal;
+	margin-left: 5px;
+	outline: none;
+}

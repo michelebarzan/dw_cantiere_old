@@ -47,6 +47,12 @@
 			
 			function creaTabella()
 			{
+				try {
+					var orderBy=document.getElementById("selectOrdinamentoPrg").value;
+				} catch (error) {
+					var orderBy="posizione DESC";
+				}
+
 				document.getElementById("containerProgressBar").style.display="table";  
 				newGridSpinner("Caricamento in corso...","spinnerContainerProgressBar","","","font-size:12px;color:white");
 				cellSelected=[];
@@ -165,7 +171,7 @@
 						}
 					}
 				};
-				xmlhttp.open("POST", "creaTabella.php?Deck="+Deck+"&FZ="+FZ+"&gruppo="+ gruppo, true);
+				xmlhttp.open("POST", "creaTabella.php?Deck="+Deck+"&FZ="+FZ+"&gruppo="+ gruppo+"&orderBy="+ orderBy, true);
 				xmlhttp.send();
 			}
 			function setSelezionata(NCabina,Descrizione)

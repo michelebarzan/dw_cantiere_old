@@ -7,6 +7,7 @@
 		$Deck=$_REQUEST['Deck'];
 		$FZ=$_REQUEST['FZ'];
 		$gruppo=$_REQUEST['gruppo'];
+		$orderBy=$_REQUEST['orderBy'];
 		
 		$attivitaParentesi=array();
 		$attivita=array();
@@ -18,6 +19,14 @@
 				echo "</span>";
 				echo "<span>Commessa: ".$_SESSION['commessa']."</span>";
 				echo "<div onclick='showPopupLegenda()'>Legenda<i class='far fa-question-circle' style='margin-left:5px;'></i></div>";
+				echo "<span style='margin-left:10px'>Ordinamento attività:";
+					echo '<select id="selectOrdinamentoPrg" onchange="creaTabella()">
+						<option value="posizione DESC">Posizione descrescente</option>
+						<option value="posizione ASC">Posizione crescente</option>
+						<option value="descrizione DESC">Nome descrescente</option>
+						<option value="descrizione ASC">Nome crescente</option>
+					</select>';
+				echo "</span>";
 				echo '<input type="button" value="" id="btnChiudiPrg" onclick="'. 'gotopath(' . htmlspecialchars(json_encode("gestionePrg.php")) . ')" />';
 				echo '<input type="button" value="" id="btnFullScreen" onclick="'. 'fullscreen()" />';
 				echo "<input type='button' value='Registra' onclick='registra()' id='btnRegistra' />";
@@ -35,7 +44,7 @@
 					echo '</th>';
 					echo '<th class="colonneFiltri" style="left:200">NCab</th>';
 					$colonne=array();
-					$queryColonne="SELECT * FROM gruppi_colonne WHERE gruppo=$gruppo  AND commessa=".$_SESSION['id_commessa'];
+					$queryColonne="SELECT * FROM gruppi_colonne WHERE gruppo=$gruppo  AND commessa=".$_SESSION['id_commessa']." ORDER BY $orderBy";
 					$resultColonne=sqlsrv_query($conn,$queryColonne);
 					if($resultColonne==FALSE)
 					{
@@ -78,7 +87,7 @@
 						dbo.[tip cab] ON w1.numero_cabina = dbo.[tip cab].[Nr# Cabina  Santarossa] AND w1.commessa = dbo.[tip cab].commessa
 						GROUP BY w1.numero_cabina, dbo.[tip cab].Deck, CONVERT(varchar(2), dbo.[tip cab].FZ), dbo.[tip cab].Famiglia, dbo.[tip cab].[Pax/Crew], w1.Descrizione, w1.commessa
 						HAVING (dbo.[tip cab].Deck LIKE N'$Deck') AND (CONVERT(varchar(2), dbo.[tip cab].FZ) LIKE '$FZ') AND (w1.commessa = ".$_SESSION['id_commessa'].")) t PIVOT (SUM(risultato) 
-						FOR descrizione IN (".implode(",",$attivitaParentesi).")) p";
+						FOR descrizione IN (".implode(",",$attivitaParentesi).")) p";//echo $queryRighe;
 			$resultRighe=sqlsrv_query($conn,$queryRighe);
 			if($resultRighe==FALSE)
 			{
