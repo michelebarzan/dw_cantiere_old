@@ -12,13 +12,18 @@
 		$attivitaParentesi=array();
 		$attivita=array();
 		
-		echo "<div id='containerIntestazione'>";
+		/*echo "<div id='containerIntestazione'>";
 			echo "<div id='intestazioneTabella'>";
+			echo "<div class='intestazione-tabella-row'>";
 				echo "<span>Gruppo:";
 					costruisciSelectGruppo($conn,"Gruppo",$gruppo);
 				echo "</span>";
-				echo "<span>Commessa: ".$_SESSION['commessa']."</span>";
 				echo "<div onclick='showPopupLegenda()'>Legenda<i class='far fa-question-circle' style='margin-left:5px;'></i></div>";
+				echo '<input type="button" value="" id="btnChiudiPrg" onclick="'. 'gotopath(' . htmlspecialchars(json_encode("gestionePrg.php")) . ')" />';
+				echo '<input type="button" value="" id="btnFullScreen" onclick="'. 'fullscreen()" />';
+			echo "</div>";
+			echo "<div class='intestazione-tabella-row'>";
+				echo "<span>Commessa: ".$_SESSION['commessa']."</span>";
 				echo "<span style='margin-left:10px'>Ordinamento attività:";
 					echo '<select id="selectOrdinamentoPrg" onchange="creaTabella()">
 						<option value="posizione DESC">Posizione descrescente</option>
@@ -27,9 +32,33 @@
 						<option value="descrizione ASC">Nome crescente</option>
 					</select>';
 				echo "</span>";
-				echo '<input type="button" value="" id="btnChiudiPrg" onclick="'. 'gotopath(' . htmlspecialchars(json_encode("gestionePrg.php")) . ')" />';
-				echo '<input type="button" value="" id="btnFullScreen" onclick="'. 'fullscreen()" />';
 				echo "<input type='button' value='Registra' onclick='registra()' id='btnRegistra' />";
+			echo "</div>";
+		echo "</div>";*/
+		echo "<div id='containerIntestazione'>";
+			echo "<div id='intestazioneTabella'>";
+			echo "<div class='intestazione-tabella-row'>";
+				echo "<div class='intestazione-tabella-div'>";
+					echo "<span>Gruppo:";
+						costruisciSelectGruppo($conn,"Gruppo",$gruppo);
+					echo "</span>";
+				echo "</div>";
+				echo "<button class='intestazione-tabella-button' onclick='showPopupLegenda()' style='margin-left:5px'><span>Legenda</span><i class='far fa-question-circle'></i></button>";
+				echo '<button class="intestazione-tabella-icon-button" id="btnFullScreen" onclick="'. 'fullscreen()" /><i class="fal fa-expand-wide"></i></button>';
+				echo '<button class="intestazione-tabella-icon-button" id="btnChiudiPrg" onclick="'. 'gotopath(' . htmlspecialchars(json_encode("gestionePrg.php")) . ')" ><i class="fal fa-times"></i></button></button>';
+			echo "</div>";
+			echo "<div class='intestazione-tabella-row'>";
+				echo "<div class='intestazione-tabella-div'>";echo "<span>Commessa: <b>".$_SESSION['commessa']."</b></span>";echo "</div>";
+				echo "<div class='intestazione-tabella-div' style='margin-left:15px'>";
+					echo "<span>Ordinamento attività:</span>";
+					echo '<select id="selectOrdinamentoPrg" onchange="creaTabella()">
+							<option value="posizione DESC">Posizione descrescente</option>
+							<option value="posizione ASC">Posizione crescente</option>
+							<option value="descrizione DESC">Nome descrescente</option>
+							<option value="descrizione ASC">Nome crescente</option>
+						</select>';
+				echo "</div>";
+				echo "<button style='margin-left:auto;opacity:0.6;background:#BFD5E1;height:30px;border:1px solid #0765D0;' class='intestazione-tabella-button' onclick='registra()' id='btnRegistra'><span style='color:#0765D0;font-weight:bold'>Registra</span></button>";
 			echo "</div>";
 		echo "</div>";
 		//echo "||SPLIT||";

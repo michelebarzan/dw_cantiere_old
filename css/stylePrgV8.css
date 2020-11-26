@@ -236,29 +236,126 @@ body
 	left:20;
 	right:20;
 	width:100%;
-	height:40px;
+	height:60px;
 	box-sizing:border-box;
 	overflow:hidden;
 	background:#DEDEDE;
-	line-height:40px;
-	text-align:left;
-	padding-left:10px;
-	padding-right:20px;
-	font-family:sans-serif;
-	color:black;
+	display:flex;
+	flex-direction:column;
+	align-items:flex-start;
+	justify-content:flex-start;
+	box-sizing:border-box;
+	padding-right:10px;
+	padding-right: 25px;
+    box-sizing: border-box;
 }
-#intestazioneTabella span
+.intestazione-tabella-row
 {
-	float:left;
-	display:inline-block;
+	height:30px;
+	min-height:30px;
+	max-height:30px;
+	overflow:hidden;
+	width:100%;
+	display:flex;
+	flex-direction:row;
+	align-items:center;
+	justify-content:flex-start;
+}
+.intestazione-tabella-div
+{
+	display:flex;
+	flex-direction:row;
+	align-items:center;
+	justify-content:center;
+}
+.intestazione-tabella-div span
+{
 	font-family:'Montserrat',sans-serif;
 	font-size:12px;
-	margin-right:20px;
+	color:black;
 }
-#intestazioneTabella div
+.intestazione-tabella-div select
 {
-	float:left;
-	display:inline-block;
+	width:auto;
+	max-width:170px;
+	font-size:12px;
+	cursor:pointer;
+	margin-left:5px;
+	outline:none;
+	color:black;
+	background-color:transparent;
+	border:none;
+	font-family:'Montserrat',sans-serif;
+	font-weight:bold;
+}
+.intestazione-tabella-div select:hover
+{
+	background-color:#bbb;
+}
+.intestazione-tabella-button
+{
+	cursor:pointer;
+	outline:none;
+	background-color:transparent;
+	border:none;
+	display:flex;
+	flex-direction:row;
+	align-items:center;
+	justify-content:center;
+}
+.intestazione-tabella-button:hover
+{
+	background-color:#bbb;
+}
+.intestazione-tabella-button span
+{
+	font-family:'Montserrat',sans-serif;
+	font-size:12px;
+	color:black;
+}
+.intestazione-tabella-button i
+{
+	margin-left:5px;
+}
+.intestazione-tabella-icon-button
+{
+	cursor:pointer;
+	outline:none;
+	background-color:transparent;
+	border:none;
+	display:flex;
+	flex-direction:row;
+	align-items:center;
+	justify-content:center;
+	box-sizing:border-box;
+	padding:5px;
+	width:30px;
+	height:30px;
+}
+.intestazione-tabella-icon-button:hover
+{
+	background-color:#bbb;
+}
+.intestazione-tabella-icon-button i
+{
+	font-size:18px;
+}
+#btnChiudiPrg:hover
+{
+	background-color:red;
+}
+#btnFullScreen
+{
+	margin-left:auto;
+}
+/*.intestazione-tabella-row span
+{
+	font-family:'Montserrat',sans-serif;
+	font-size:12px;
+	margin-right:20px;color:black;
+}
+.intestazione-tabella-row div
+{
 	font-family:'Montserrat',sans-serif;
 	font-size:12px;
 	text-align:center;
@@ -267,33 +364,36 @@ body
 	color:black;
 	background-color:transparent;
 	height:20px;
-	line-height:20px;
+	display:flex;
+	flex-direction:row;
+	align-items:center;
+	justify-content:center;
 	padding-left:5px;
 	padding-right:5px;
 	margin-top:10px;
 	border:none;
 	font-weight:normal;
 }
-#intestazioneTabella div:hover
+.intestazione-tabella-row div:hover
 {
 	background-color:#bbb;
-}
-#btnRegistra
+}*/
+/*#btnRegistra
 {
 	text-align:center;
-	width:130px;
 	outline:none;
-	margin-top:5px;
-	height:30px;
-	font-family:sans-serif;
-	display:inline-block;
-	font-size:90%;
+	height:20px;
+	font-family:'Montserrat',sans-serif;
+	font-size:12px;
 	background:#BFD5E1;
 	color:#0765D0;
 	border:1px solid #0765D0;
 	cursor:pointer;
 	box-sizing:border-box;
-	float:right;
+	margin-left:auto;
+	box-sizing:border-box;
+	padding-left:5px;
+	padding-right:5px;
 	opacity:0.6;
 	font-weight:bold;
 }
@@ -347,7 +447,7 @@ body
 	background-image: url("../images/fullscreen.png");
 	background-position: center center;
 	background-repeat: no-repeat;
-}
+}*/
 #tabella
 {
 	z-index:9;
@@ -455,7 +555,7 @@ body
 	font-weight:bold;
 	font-size:100%;
 }
-.selectFiltroGruppo
+/*.selectFiltroGruppo
 {
 	width:auto;
 	font-size:12px;
@@ -474,7 +574,7 @@ body
 .selectFiltroGruppo:hover
 {
 	background-color:#bbb;
-}
+}*/
 thead 
 { 
 	z-index:9;
@@ -648,14 +748,4 @@ tbody
 	font-family:'Montserrat',sans-serif;
 	height:95px;
 	padding:5px;
-}
-#selectOrdinamentoPrg
-{
-	background-color: transparent;
-	border:none;
-	font-family:'Montserrat',sans-serif;
-    font-size:12px;
-	font-weight: normal;
-	margin-left: 5px;
-	outline: none;
 }
