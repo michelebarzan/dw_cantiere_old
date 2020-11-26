@@ -796,7 +796,7 @@ html
 	display:inline-block;
 	position:absolute;
 	top:250;
-	min-width:1300px;
+	/*min-width:1300px;*/
 	left:100;
 	right:100;
 	font-family:'Montserrat',sans-serif;

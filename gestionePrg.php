@@ -49,10 +49,11 @@
 	<body onload="aggiungiNotifica('Stai lavorando sulla commessa <?php echo $_SESSION['commessa']; ?>');">
 		<?php include('struttura.php'); ?>
 		<div id="popupAttivitaGruppo" onmouseout='document.getElementById("popupAttivitaGruppo").style.display="none";'></div>
-		<div id="container">
+		<div id="container"style="width:auto">
 			<div id="content">
-				<div id="immagineLogo" class="immagineLogo" ></div>
-				
+				<div class="logo" style="width:100%;margin-top:30px">
+					<img src="images/logo.png">
+				</div>
 				<form action="prg.php" id="formGestionePrg" method="POST" >
 					<div id="gestionPrgContainer">
 						<div class="inputContainerGestionPrg">

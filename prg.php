@@ -161,6 +161,15 @@
 							all[i].style.maxWidth="40px"; 
 							all[i].style.minWidth="40px"; 
 						}
+
+						var pageHeight=document.body.offsetHeight;
+						/*var tbodyHeight=pageHeight-height-40-60-40;
+						document.getElementById("myTable").getElementsByTagName("tbody")[0].style.height=tbodyHeight+"px";*/
+
+						document.getElementById("myTable").getElementsByTagName("tbody")[0].style.width="100%";
+
+						document.getElementById("myTable").style.height=(pageHeight-40)+"px";
+
 						if(this.responseText.indexOf('#endofresponse#')>0)
 						{
 							clearInterval(intervalTime);
