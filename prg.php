@@ -45,7 +45,7 @@
 			
 		</script>
 	</head>
-	<body onload="creaTabella()">
+	<body onload="checkCookies();">
 		<div id="popupAttivitaGruppo" onmouseout='document.getElementById("popupAttivitaGruppo").style.display="none";'></div>
 		<div id="containerProgressBar">
 			<div id="middle">

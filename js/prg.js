@@ -1,41 +1,22 @@
     var cellSelected=[];
     var cabineSelected=[];
     var attivitaSelected=[];
-
+    var orderBy;
     var loaded=false;
 
+    async function checkCookies()
+    {
+        var orderByCookie=await getCookie("selectOrdinamentoPrg");
+        //console.log(orderByCookie);
+        if(orderByCookie!=="")
+            orderBy=orderByCookie;
+        else
+            orderBy="posizione ASC";
+
+        creaTabella();
+    }
     async function creaTabella()
     {
-        /*if(!loaded)
-        {
-            var orderBy=await getCookie("selectOrdinamentoPrg");
-            console.log(orderBy);
-            loaded=true;
-
-            if(orderBy==null || orderBy=="")
-            {
-                try {
-                var orderBy=document.getElementById("selectOrdinamentoPrg").value;
-                } catch (error) {
-                    var orderBy="posizione DESC";
-                }
-                setCookie("selectOrdinamentoPrg",orderBy);
-            }
-            else
-            {
-                document.getElementById("selectOrdinamentoPrg").value=orderBy;
-            }
-        }
-        else
-        {*/
-            try {
-            var orderBy=document.getElementById("selectOrdinamentoPrg").value;
-            } catch (error) {
-                var orderBy="descrizione ASC";
-            }
-        //}
-        
-
         document.getElementById("containerProgressBar").style.display="table";  
         newGridSpinner("Caricamento in corso...","spinnerContainerProgressBar","","","font-size:12px;color:white");
         cellSelected=[];
@@ -83,55 +64,18 @@
             }
         }
 
-        /*var xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function() 
-        {
-            if (this.readyState == 4 && this.status == 200) 
-            {
-                var res=this.responseText.split("|");
-                var time2=res[0];
-                var time=res[1];
-                var nCelle=res[2];
-                
-                document.getElementById("nCelle").innerHTML="Totale: "+nCelle+" celle"; 
-                
-                document.getElementById("containerProgressBar").style.display="table";  
-                document.getElementById("bar").style.width="0%";
-                
-                var elem = document.getElementById("bar");   
-                var width = 0.0;
-                interval = setInterval(frame, time2/100);
-                function frame() 
-                {
-                    if (width >= 100) 
-                    {
-                        clearInterval(interval);
-                    } 
-                    else 
-                    {
-                        width+=0.2; 
-                        width2=width.toFixed(1);
-                        elem.style.width = width2 + '%'; 
-                        if(Number.isInteger(width2))
-                            document.getElementById("progressPC").innerHTML = width2+".0";
-                        else
-                            document.getElementById("progressPC").innerHTML = width2;
-                    }
-                }
-            }
-        };
-        xmlhttp.open("POST", "getNCelle.php?Deck="+Deck+"&FZ="+FZ+"&gruppo="+ gruppo, true);
-        xmlhttp.send();	*/			
+        console.log(orderBy);
+
+        if(document.getElementById("selectOrdinamentoPrg")!=null)
+            orderBy=document.getElementById("selectOrdinamentoPrg").value;
+
+        console.log(orderBy);
         
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function() 
         {
             if (this.readyState == 4 && this.status == 200) 
             {
-                /*var response=this.responseText.split("||SPLIT||");
-                document.getElementById("tabella").innerHTML  =  response[1];
-                var tabella=document.getElementById("tabella").outerHTML;
-                document.getElementById("container").innerHTML=response[0]+tabella;*/
                 document.getElementById("tabella").innerHTML  =this.responseText;
                 var all = document.getElementsByClassName("attivita");
                 for (var i = 0; i < all.length; i++) 
@@ -148,17 +92,8 @@
                 var pageHeight=document.body.offsetHeight;
                 console.log(pageHeight);
 
-                /*var tbodyHeight=pageHeight-height-40-60-40;
-                document.getElementById("myTable").getElementsByTagName("tbody")[0].style.height=tbodyHeight+"px";*/
-
-                //document.getElementById("myTable").style.height=(pageHeight-40)+"px";
-
                 document.getElementById("myTable").getElementsByTagName("tbody")[0].style.width="calc(100% + 20px)";
                 document.getElementById("myTable").getElementsByTagName("tbody")[0].style.height=(pageHeight-80)+"px";
-
-                /*document.getElementById("myTable").style.height=(pageHeight-40)+"px";
-                document.getElementById("myTable").style.maxHeight=(pageHeight-40)+"px";
-                document.getElementById("myTable").style.minHeight=(pageHeight-40)+"px";*/
 
                 if(this.responseText.indexOf('#endofresponse#')>0)
                 {
@@ -168,6 +103,41 @@
                     clearInterval(interval);
                     document.getElementById("containerProgressBar").style.display="none"; 
                 }
+
+                var select=document.createElement("select");
+                select.setAttribute("id","selectOrdinamentoPrg");
+                select.setAttribute("onchange","setCookie('selectOrdinamentoPrg',this.value);creaTabella()");
+
+                var option=document.createElement("option");
+                option.setAttribute("value","posizione ASC");
+                if(orderBy=="posizione ASC")
+                    option.setAttribute("selected","selected");
+                option.innerHTML="Posizione crescente";
+                select.appendChild(option);
+
+                var option=document.createElement("option");
+                option.setAttribute("value","descrizione ASC");
+                if(orderBy=="descrizione ASC")
+                    option.setAttribute("selected","selected");
+                option.innerHTML="Nome crescente";
+                select.appendChild(option);
+
+                var option=document.createElement("option");
+                option.setAttribute("value","posizione DESC");
+                if(orderBy=="posizione DESC")
+                    option.setAttribute("selected","selected");
+                option.innerHTML="Posizione decrescente";
+                select.appendChild(option);
+
+                var option=document.createElement("option");
+                option.setAttribute("value","descrizione DESC");
+                if(orderBy=="descrizione DESC")
+                    option.setAttribute("selected","selected");
+                option.innerHTML="Nome decrescente";
+                select.appendChild(option);
+
+                document.getElementById("selectOrdinamentoPrgContainer").innerHTML="";
+                document.getElementById("selectOrdinamentoPrgContainer").appendChild(select);
             }
         };
         xmlhttp.open("POST", "creaTabella.php?Deck="+Deck+"&FZ="+FZ+"&gruppo="+ gruppo+"&orderBy="+ orderBy, true);

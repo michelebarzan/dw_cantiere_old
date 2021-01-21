@@ -51,27 +51,22 @@
 				echo "<div class='intestazione-tabella-div'>";echo "<span>Commessa: <b>".$_SESSION['commessa']."</b></span>";echo "</div>";
 				echo "<div class='intestazione-tabella-div' style='margin-left:15px'>";
 					echo "<span>Ordinamento attività:</span>";
-					echo '<select id="selectOrdinamentoPrg" onchange="setCookie(' . htmlspecialchars(json_encode("selectOrdinamentoPrg")) . ',this.value);creaTabella()">';
+					echo '<div id="selectOrdinamentoPrgContainer"></div>';
+					/*echo '<select id="selectOrdinamentoPrg" onchange="setCookie(' . htmlspecialchars(json_encode("selectOrdinamentoPrg")) . ',this.value);creaTabella()">';
 						switch ($orderBy)
 						{
+							case 'posizione ASC':echo '<option value="posizione ASC">Posizione crescente</option>';break;
 							case 'descrizione ASC':echo '<option value="descrizione ASC">Nome crescente</option>';break;
 							case 'posizione DESC':echo '<option value="posizione DESC">Posizione descrescente</option>';break;
-							case 'posizione ASC':echo '<option value="posizione ASC">Posizione crescente</option>';break;
 							case 'descrizione DESC':echo '<option value="descrizione DESC">Nome descrescente</option>';break;						
 						}
+						if($orderBy!="posizione ASC")
+						echo '<option value="posizione ASC">Posizione crescente</option>';
 						if($orderBy!="descrizione ASC")
 							echo '<option value="descrizione ASC">Nome crescente</option>';
 						if($orderBy!="posizione DESC")
 						echo '<option value="posizione DESC">Posizione descrescente</option>';
-							if($orderBy!="posizione ASC")
-						echo '<option value="posizione ASC">Posizione crescente</option>';
 							if($orderBy!="descrizione DESC")
-						echo '<option value="descrizione DESC">Nome descrescente</option>';
-					echo '</select>';
-					/*echo '<select id="selectOrdinamentoPrg" onchange="setCookie(' . htmlspecialchars(json_encode("selectOrdinamentoPrg")) . ',this.value);creaTabella()">';
-						echo '<option value="descrizione ASC">Nome crescente</option>';
-						echo '<option value="posizione DESC">Posizione descrescente</option>';
-						echo '<option value="posizione ASC">Posizione crescente</option>';
 						echo '<option value="descrizione DESC">Nome descrescente</option>';
 					echo '</select>';*/
 				echo "</div>";
