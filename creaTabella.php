@@ -312,7 +312,7 @@
 				$n1=$row1['n1'];
 			}
 		}
-		$query2="SELECT COUNT(DISTINCT $colonna) AS n2 FROM dbo.[tip cab]";
+		$query2="SELECT COUNT(DISTINCT $colonna) AS n2 FROM dbo.[tip cab] WHERE commessa=".$_SESSION['id_commessa'];
 		$result2=sqlsrv_query($conn,$query2);
 		if($result2==FALSE)
 		{
