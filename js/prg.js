@@ -64,12 +64,8 @@
             }
         }
 
-        console.log(orderBy);
-
         if(document.getElementById("selectOrdinamentoPrg")!=null)
             orderBy=document.getElementById("selectOrdinamentoPrg").value;
-
-        console.log(orderBy);
         
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function() 
@@ -90,7 +86,6 @@
                 }
 
                 var pageHeight=document.body.offsetHeight;
-                console.log(pageHeight);
 
                 document.getElementById("myTable").getElementsByTagName("tbody")[0].style.width="calc(100% + 20px)";
                 document.getElementById("myTable").getElementsByTagName("tbody")[0].style.height=(pageHeight-80)+"px";
@@ -180,8 +175,38 @@
             document.getElementById("cell"+NCabina+Descrizione).style.cursor="not-allowed";
         }
     }
-    function registra()
-    {			
+    function checkDitteAttivita(attivita)
+    {
+        return new Promise(function (resolve, reject) 
+        {
+            var JSONattivita=JSON.stringify(attivita);
+            $.get("checkDitteAttivita.php",{JSONattivita},
+            function(response, status)
+            {
+                if(status=="success")
+                {
+                    if(response.toLowerCase().indexOf("error")>-1 || response.toLowerCase().indexOf("notice")>-1 || response.toLowerCase().indexOf("warning")>-1)
+                    {
+                        Swal.fire({icon:"error",title: "Errore. Se il problema persiste contatta l' amministratore",onOpen : function(){document.getElementsByClassName("swal2-title")[0].style.color="gray";document.getElementsByClassName("swal2-title")[0].style.fontSize="14px";}});
+                        console.log(response);
+                        resolve([]);
+                    }
+                    else
+                    {
+                        try {
+                            resolve(JSON.parse(response));
+                        } catch (error) {
+                            Swal.fire({icon:"error",title: "Errore. Se il problema persiste contatta l' amministratore",onOpen : function(){document.getElementsByClassName("swal2-title")[0].style.color="gray";document.getElementsByClassName("swal2-title")[0].style.fontSize="14px";}});
+                            console.log(response);
+                            resolve([]);
+                        }
+                    }
+                }
+            });
+        });
+    }
+    async function registra()
+    {
         if(cellSelected.length==0)
             window.alert("Nessuna attivita selezionata");
         else
@@ -197,23 +222,95 @@
             var attivitaS=attivitaSelectedUnique.toString();
             var cabineS=cabineSelected.toString();
             var cellS=cellSelected.toString();
-            
-            var xmlhttp = new XMLHttpRequest();
-            xmlhttp.onreadystatechange = function() 
+
+            var ditte_response=await checkDitteAttivita(attivitaSelectedUnique);
+            console.log(ditte_response);
+            if(ditte_response.ditte_attivita.length<=1)
             {
-                if (this.readyState == 4 && this.status == 200) 
+                var outerContainer=document.createElement("div");
+                outerContainer.setAttribute("style","");
+
+                var select=document.createElement("select");
+                select.setAttribute("style","width:calc(100% - 100px);margin-left:50px;margin-right:50px;height:30px;background-color:transparent;border:none;border-bottom:1px solid gray;font-family:'Montserrat',sans-serif;font-size:12px;color:black;");
+                select.setAttribute("id","selectPopupScegliDitta");
+
+                var option=document.createElement("option");
+                option.setAttribute("value","");
+                option.innerHTML="Nessuna";
+                select.appendChild(option);
+
+                ditte_response.anagrafica_ditte.forEach(ditta =>
                 {
+                    var option=document.createElement("option");
+                    option.setAttribute("value",ditta.id_ditta);
+                    if(ditte_response.ditte_attivita.length==1 && ditte_response.ditte_attivita[0].nome==ditta.nome)
+                        option.setAttribute("selected","selected");
+                    option.innerHTML=ditta.nome;
+                    select.appendChild(option);
+                });
+
+                outerContainer.appendChild(select);
+
+                Swal.fire
+                ({
+                    title: '<span class="titleSwalList">Scegli ditta</span>',
+                    html:outerContainer.outerHTML,
+                    allowOutsideClick:false,
+                    showCloseButton:false,
+                    showConfirmButton:true,
+                    allowEscapeKey:false,
+                    showCancelButton:false,
+                    confirmButtonText:"Conferma",
+                    onOpen : function(){}
+                }).then((result) => 
+                {
+                    var ditta=document.getElementById("selectPopupScegliDitta").value;
                     document.getElementById("btnRegistra").disabled = false;
-                    if(this.responseText=="ok")
+                    if(result.value)
                     {
-                        creaTabella();
+                        var xmlhttp = new XMLHttpRequest();
+                        xmlhttp.onreadystatechange = function() 
+                        {
+                            if (this.readyState == 4 && this.status == 200) 
+                            {
+                                if(this.responseText=="ok")
+                                {
+                                    creaTabella();
+                                }
+                                else
+                                {
+                                    console.log(this.responseText);
+                                    window.alert("Errore"+this.responseText);
+                                }
+                            }
+                        };
+                        xmlhttp.open("POST", "registraAttivita.php?attivitaS="+attivitaS+"&cabineS="+cabineS+"&cellS="+ cellS+"&ditta="+ ditta+"&extra=true", true);
+                        xmlhttp.send();
                     }
-                    else
-                        window.alert("Errore"+this.responseText);
-                }
-            };
-            xmlhttp.open("POST", "registraAttivita.php?attivitaS="+attivitaS+"&cabineS="+cabineS+"&cellS="+ cellS, true);
-            xmlhttp.send();
+                });
+            }
+            else
+            {                
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange = function() 
+                {
+                    if (this.readyState == 4 && this.status == 200) 
+                    {
+                        document.getElementById("btnRegistra").disabled = false;
+                        if(this.responseText=="ok")
+                        {
+                            creaTabella();
+                        }
+                        else
+                        {
+                            console.log(this.responseText);
+                            window.alert("Errore"+this.responseText);
+                        }
+                    }
+                };
+                xmlhttp.open("POST", "registraAttivita.php?attivitaS="+attivitaS+"&cabineS="+cabineS+"&cellS="+ cellS+"&ditta="+ ditte_response.ditte_attivita[0].id_ditta+"&extra=false", true);
+                xmlhttp.send();
+            }
         }
     }
     function attivitaGruppo(event)

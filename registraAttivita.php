@@ -6,6 +6,8 @@
 	$attivitaS=$_REQUEST['attivitaS'];
 	$cabineS=$_REQUEST['cabineS'];
 	$cellS=$_REQUEST['cellS'];
+	$ditta=$_REQUEST['ditta'];
+	$extra=$_REQUEST['extra'];
 	
 	$attivitaArray=explode(",",$attivitaS);
 	$cabineArray=explode(",",$cabineS);
@@ -15,16 +17,16 @@
 	//$dataOra = date('Y-m-d h:i:s', time());
 	$IDAttSvolte=getIDATTSvolte($conn);
 	
-	$queryInsertAttivitaSvolte="INSERT INTO attivitasvolteV ([IDAttSvolte],[codiceattivita],[datasvolgimento],[Memorizzato],[commessa]) ";
+	$queryInsertAttivitaSvolte="INSERT INTO attivitasvolteV ([IDAttSvolte],[codiceattivita],[datasvolgimento],[Memorizzato],[commessa],[NomeDitta],[extra]) ";
 	$i=0;
 	while($i<sizeof($attivitaArray))
 	{		
 		$IDAttSvolte++;
 		array_push($attivitaIDAttSvolteArray,$attivitaArray[$i]."|".$IDAttSvolte);
 		if($i==sizeof($attivitaArray)-1)
-			$queryInsertAttivitaSvolte=$queryInsertAttivitaSvolte."SELECT $IDAttSvolte, ".getCodiceAttivita($conn,$attivitaArray[$i]).", getDate(),1,".$_SESSION['id_commessa']." ";
+			$queryInsertAttivitaSvolte=$queryInsertAttivitaSvolte."SELECT $IDAttSvolte, ".getCodiceAttivita($conn,$attivitaArray[$i]).", getDate(),1,".$_SESSION['id_commessa'].", '$ditta', '$extra' ";
 		else
-			$queryInsertAttivitaSvolte=$queryInsertAttivitaSvolte."SELECT $IDAttSvolte, ".getCodiceAttivita($conn,$attivitaArray[$i]).", getDate(),1,".$_SESSION['id_commessa']." UNION ALL ";
+			$queryInsertAttivitaSvolte=$queryInsertAttivitaSvolte."SELECT $IDAttSvolte, ".getCodiceAttivita($conn,$attivitaArray[$i]).", getDate(),1,".$_SESSION['id_commessa'].", '$ditta', '$extra' UNION ALL ";
 		$i++;
 	}
 	
