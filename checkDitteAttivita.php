@@ -27,7 +27,7 @@
         }
     }
 
-    $query2="SELECT * FROM cantiere_ditte";
+    $query2="SELECT * FROM cantiere_ditte WHERE eliminata='false'";
 	$result2=sqlsrv_query($conn,$query2);
 	if($result2==FALSE)
 		die("error".$query);
